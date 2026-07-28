@@ -47,19 +47,42 @@ body {
 }
 
 /*main section for search and temperature*/
-.search-container {
+.search-wrapper {
     display: flex;
-    justify-content: center;
     align-items: center;
     padding: 20px 0;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto;   
+    border-radius: 12px;
+    width: 100%;
+}
+.search-container {
+    display: flex;
+    align-items: center;
     padding: 20px 0;
     
+}
+
+.search-container img {
+    position: absolute;
 }
 
 .search-container input {
     padding: .6rem 10rem;
     font-size: 1.2rem;
     border: none;
+    background-color: #E1F5FE;
+}
+
+.search-container input:hover {
+    background-color: #03A9F4;
+}
+
+.search-container input:focus {
+    color: black;
+}
+
+.closeBtn {
+    width: 25px;
+    height: 35px;
 }

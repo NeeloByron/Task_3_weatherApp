@@ -33,9 +33,12 @@ function App() {
             
             {/*body*/}
             <main>
-              <div className={'search-container'}>
+              <div className={'search-wrapper'}>
+                <div className={'search-container'}>
                   <img src={searchIcon} />
                   <input type={'text'} placeholder={'Search..'}  />
+                  <button className={'closeBtn'}>x</button>
+               </div>
               </div>
 
               <div>
