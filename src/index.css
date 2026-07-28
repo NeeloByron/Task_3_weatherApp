@@ -55,4 +55,11 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px 0;
+    
+}
+
+.search-container input {
+    padding: .6rem 10rem;
+    font-size: 1.2rem;
+    border: none;
 }
