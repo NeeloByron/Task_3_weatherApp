@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Epunda+Sans:ital,wght@0,300..900;1,300..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
+:root {
+    --primary-color: #B3D4FF;
+    --secondary-color: #1C2541;
+}
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -18,11 +21,11 @@ body {
 }
 
 #light {
-    background-color: #E1F5FE;
+    background-color: var(--primary-color);
 }
 
 #dark {
-    background-color: #03A9F4;
+    background-color: var(--secondary-color);
 }
 /*header container */
 
@@ -47,20 +50,15 @@ body {
 }
 
 /*main section for search and temperature*/
-.search-wrapper {
+.search-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 20px 0;
     max-width: 1200px;
     margin: 0 auto;   
     border-radius: 12px;
     width: 100%;
-}
-.search-container {
-    display: flex;
-    align-items: center;
-    padding: 20px 0;
-    
 }
 
 .search-container img {

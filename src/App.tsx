@@ -28,12 +28,15 @@ function App() {
 
              <div className={'switch-btn'}>
                 <ReactSwitch onChange={toggleTheme}
-                          checked={theme === "dark"}/>
+                          checked={theme === "dark"}
+                           checkedIcon={false}
+                           uncheckedIcon={false}/>
              </div>
           </header>
-            
+           <main>
           {/*search component*/}
           <Search />
+          </main>  
 
         </div>
         </ThemeContext.Provider>
