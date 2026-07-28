@@ -1,5 +1,6 @@
 import React, { useState, createContext } from "react";
 import ReactSwitch from "react-switch";
+import searchIcon from "@/Assets/search-icon.png"
 
 interface ThemeContextType {
   theme: string;
@@ -18,11 +19,30 @@ function App() {
      <>
      <ThemeContext.Provider value={{ theme, toggleTheme}}>
        <div className={'main-container'} id={theme} >
+           {/*header*/}
           <header className={'header-container'}>
-             <h1>Weather App</h1>
-             <ReactSwitch onChange={toggleTheme}
+             <div className={'header-title'}>
+               <h1>Weather App</h1>
+             </div>
+
+             <div className={'switch-btn'}>
+                <ReactSwitch onChange={toggleTheme}
                           checked={theme === "dark"}/>
+             </div>
           </header>
+            
+            {/*body*/}
+            <main>
+              <div className={'search-container'}>
+                  <img src={searchIcon} />
+                  <input type={'text'} placeholder={'Search..'}  />
+              </div>
+
+              <div>
+
+              </div>
+            </main>
+
         </div>
         </ThemeContext.Provider>
      </>

@@ -8,25 +8,13 @@
 
 body {
     font-family: 'Epunda+Sans', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     overflow-x: hidden;
-    color: #1C2024;
 }
 
-.main-container {
-
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
 }
 
 #light {
@@ -35,4 +23,36 @@ body {
 
 #dark {
     background-color: #03A9F4;
+}
+/*header container */
+
+.main-container {
+    height: 100vh;
+    padding: 20px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 42rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-title h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #222D3A;
+}
+
+/*main section for search and temperature*/
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
 }
