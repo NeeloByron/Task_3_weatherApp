@@ -1,6 +1,7 @@
 import React, { useState, createContext } from "react";
 import ReactSwitch from "react-switch";
-import searchIcon from "@/Assets/search-icon.png"
+import Search from "./Components/Search";
+
 
 interface ThemeContextType {
   theme: string;
@@ -31,20 +32,8 @@ function App() {
              </div>
           </header>
             
-            {/*body*/}
-            <main>
-              <div className={'search-wrapper'}>
-                <div className={'search-container'}>
-                  <img src={searchIcon} />
-                  <input type={'text'} placeholder={'Search..'}  />
-                  <button className={'closeBtn'}>x</button>
-               </div>
-              </div>
-
-              <div>
-
-              </div>
-            </main>
+          {/*search component*/}
+          <Search />
 
         </div>
         </ThemeContext.Provider>
