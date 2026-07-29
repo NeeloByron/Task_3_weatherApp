@@ -21,8 +21,9 @@ function App() {
      <>
      <ThemeContext.Provider value={{ theme, toggleTheme}}>
        <div className={'main-container'} id={theme} >
+        <div className={'content-container'}>
            {/*header*/}
-          <header className={'header-container'}>
+          <div className={'header-container'}>
              <div className={'header-title'}>
                <h1>Weather App</h1>
              </div>
@@ -33,17 +34,15 @@ function App() {
                            checkedIcon={false}
                            uncheckedIcon={false}/>
              </div>
-          </header>
-           <main>
-          {/*search component*/}
-          <div className={''}>
-            <Search />
-            <TempToggle />
           </div>
-         
-          </main>  
 
-        </div>
+             {/*search component*/}
+              <div className={'main-search-container'}>
+                <Search />
+                <TempToggle />
+              </div>
+     </div>
+         </div>
         </ThemeContext.Provider>
      </>
    

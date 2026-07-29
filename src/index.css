@@ -34,6 +34,12 @@ body {
     padding: 20px 0;
 }
 
+.content-container {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .header-container {
     display: flex;
     justify-content: center;
@@ -193,5 +199,10 @@ body {
     color: rgb(255, 243, 243);
     font-size: 14px;
 }
+/*search and toggle container*/
+.main-search-container {
+  display: flex;
+}
+
 
 /* Temperature togggle component */
