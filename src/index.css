@@ -127,10 +127,47 @@ body {
     left: 0px;
     right: 0px;
     background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 25px 100px rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
     color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(24px);
     overflow: hidden;
     z-index: 50;
     margin-top: 12px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to  {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spainer {
+    animation: spin 1s linear infinite;
+    border-radius: 9999px;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-text p {
+    padding: 1.5rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.searchButton  {
+    width: 100%;
+    padding: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: left;
 }

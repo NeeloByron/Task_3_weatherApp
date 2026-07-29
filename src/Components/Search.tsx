@@ -15,10 +15,19 @@ export const Search = () => {
           </form>
            
           <div className={'searchDropDown'}>
-            <div className={'search'}>
-              <div className={''}>
-                <p>Search Cities..</p>
+            <div className={'searchLoading'}>
+              <div className={'search-text'}>
+                <div className={'loading-spainer'}></div>
+                <p>Search City..</p>
               </div>
+                 {/*search button*/}
+                <button className={'searchButton'}>
+                  <div className={'text-search'}>
+                    City Name <span> City/State </span>
+                  </div>
+                    <div className={'search-country'}>coutry</div>
+                       <search className={'searchInput'} />
+                </button>
             </div>
           </div>
           
