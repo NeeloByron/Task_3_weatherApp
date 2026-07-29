@@ -38,8 +38,8 @@ export const Header = () => {
 
            {/*search component*/}
             <div className={'main-search-container'}>
-              <Search />
-              <TempToggle />
+                   <Search />
+                 <TempToggle /> 
             </div>
            </div>
          </div>

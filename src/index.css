@@ -65,8 +65,28 @@ body {
     width: 100%;
 }
 
+.form-container {
+    max-width: 672px;
+    margin: 0 auto;
+    width: 100%;
+    
+}
+
 .form-group {
    position: relative;
+   display: flex;
+   align-items: center;
+   width: 100%;
+ 
+}
+
+.form-group .search-icon {
+    position: absolute;
+    left: 1rem;
+    width: 1.2rem;
+    height: 1.25rem;
+    opacity: 0.6;
+    pointer-events: none;
 }
 
 .search-container img {
