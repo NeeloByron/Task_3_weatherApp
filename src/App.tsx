@@ -1,6 +1,7 @@
 import React, { useState, createContext } from "react";
 import ReactSwitch from "react-switch";
 import Search from "./Components/Search";
+import TempToggle from "./Components/TempToggle";
 
 
 interface ThemeContextType {
@@ -37,6 +38,7 @@ function App() {
           {/*search component*/}
           <div className={''}>
             <Search />
+            <TempToggle />
           </div>
          
           </main>  

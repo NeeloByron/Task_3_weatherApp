@@ -25,7 +25,7 @@ export const Search = () => {
                   <div className={'text-search'}>
                     City Name <span> City/State </span>
                   </div>
-                    <div className={'search-country'}>coutry</div>
+                    <div className={'search-country'}>Country</div>
                        <search className={'searchInput'} />
                 </button>
             </div>
