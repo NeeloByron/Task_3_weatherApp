@@ -35,7 +35,10 @@ function App() {
           </header>
            <main>
           {/*search component*/}
-          <Search />
+          <div className={''}>
+            <Search />
+          </div>
+         
           </main>  
 
         </div>

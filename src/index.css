@@ -99,15 +99,38 @@ body {
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
-.closeBtn {
+.closeBtn button {
     background: transparent;
     border: none;
     transform: translateY(-50%);
     color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     position: absolute;
     cursor: pointer;
     transition: all 0.3s ease;
     right: 56px;
     top: 50%;
     border-radius: 50%;
+    border: none;
+}
+
+.closeBtn button:hover {
+    color: #fff;
+    transition: all 0.3s ease;
+    padding: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.searchDropDown {
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 100px rgba(0, 0, 0, 0.25);
+    color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(24px);
+    overflow: hidden;
+    z-index: 50;
+    margin-top: 12px;
 }
