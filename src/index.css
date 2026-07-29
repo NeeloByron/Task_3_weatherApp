@@ -12,6 +12,7 @@
 body {
     font-family: 'Epunda+Sans', sans-serif;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 .grid-container {
@@ -44,7 +45,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 42rem;
+    gap: 15rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -64,8 +65,8 @@ body {
     width: 100%;
 }
 
-.form-container {
-    position: relative;
+.form-group {
+   position: relative;
 }
 
 .search-container img {
@@ -105,12 +106,12 @@ body {
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
-.closeBtn button {
+.closeBtn {
     background: transparent;
     border: none;
     transform: translateY(-50%);
     color: rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
     position: absolute;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -118,9 +119,11 @@ body {
     top: 50%;
     border-radius: 50%;
     border: none;
+    width: 40px;
+    height: 38px;
 }
 
-.closeBtn button:hover {
+.closeBtn:hover {
     color: #fff;
     transition: all 0.3s ease;
     padding: 4px;

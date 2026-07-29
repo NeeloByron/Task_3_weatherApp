@@ -23,24 +23,25 @@ export const Header = () => {
         <div className={'content-container'}>
            {/*header*/}
           <div className={'header-container'}>
-             <div className={'header-title'}>
-               <h1>Weather App</h1>
-             </div>
+              <div className={'header-title'}>
+                 <h1>Weather App</h1>
+              </div>
 
              <div className={'switch-btn'}>
                 <ReactSwitch onChange={toggleTheme}
                           checked={theme === "dark"}
                            checkedIcon={false}
                            uncheckedIcon={false}/>
-             </div>
-          </div>
-
-             {/*search component*/}
-              <div className={'main-search-container'}>
-                <Search />
-                <TempToggle />
               </div>
-     </div>
+
+           </div>
+
+           {/*search component*/}
+            <div className={'main-search-container'}>
+              <Search />
+              <TempToggle />
+            </div>
+           </div>
          </div>
         </ThemeContext.Provider>
     </>
