@@ -3,7 +3,12 @@
 export const TempToggle = () => {
   return (
        <>
-         <div>Temperature toggle</div>
+        <div className={'tempToggle-main'}>
+          <div className={'toggleBtn-container'}>
+            <button className={'toggleBtn'}>°C</button>
+            <button className={'toggleBtn'}>°F</button>
+          </div>
+        </div>
        </>
   )
 }

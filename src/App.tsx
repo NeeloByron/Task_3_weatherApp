@@ -1,11 +1,12 @@
 import { Header } from "./Components/WeatherApp"
+
 function App() {
   
   return (
      <>
       <Header />
+      
      </>
-   
   )
 }
 

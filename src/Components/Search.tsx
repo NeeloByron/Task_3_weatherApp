@@ -1,6 +1,7 @@
 import React from 'react'
 import searchIcon from "@/Assets/search-icon.png"
 
+
 export const Search = () => {
   return (
       <> 
@@ -32,6 +33,7 @@ export const Search = () => {
           </div>
           
         </div>
+         
       </>
   );
 }
