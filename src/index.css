@@ -230,10 +230,34 @@ body {
 /*search and toggle container*/
 .main-search-container {
   display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 
 /* Temperature togggle component */
-.temperature-icon {
+.tempToggle-main {
+   background-color: rgba(255, 255, 255, 0.1);
+   backdrop-filter: blur(24px);
+   border: 1px solid rgba(255, 255, 255, 0.3);
+   border-radius: 1rem;
+}
+
+.toggleBtn-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 2.5rem;
+}
+.toggleBtn {
+    padding: 7px;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    font-weight: 540;
+    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+   
 }

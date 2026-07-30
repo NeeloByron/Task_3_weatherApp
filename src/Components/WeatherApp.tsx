@@ -34,13 +34,14 @@ export const Header = () => {
                            checkedIcon={false}
                            uncheckedIcon={false}/>
               </div>
-
            </div>
 
            {/*search component*/}
             <div className={'main-search-container'}>
                    <Search />
+             <div className={'tempToggle-main'}>      
                    <TempToggle />
+              </div>     
             </div>
            </div>
          </div>
