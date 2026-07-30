@@ -10,3 +10,6 @@ Custom-night-mode-toggle
 css variables 
 - https://www.youtube.com/watch?v=W5_5WvYjPeI
 - https://www.youtube.com/watch?v=5wLrz_zUwoU
+
+Error-Handling 
+- https://dev.to/doylecodes/making-alerts-for-a-web-app-41d6

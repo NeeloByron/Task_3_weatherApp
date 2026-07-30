@@ -2,6 +2,7 @@ import React, { useState, createContext } from "react";
 import ReactSwitch from "react-switch";
 import Search from '@/Components/Search'
 import TempToggle from '@/Components/TempToggle'
+import ErrorMessage from '@/Components/ErrorMessage'
 
 
 interface ThemeContextType {
@@ -36,13 +37,19 @@ export const Header = () => {
               </div>
            </div>
 
-           {/*search component*/}
+           {/*search component
             <div className={'main-search-container'}>
                    <Search />
              <div className={'tempToggle-main'}>      
                    <TempToggle />
               </div>     
-            </div>
+            </div> */}
+
+            {/*Error condition
+            <div className={'errorContainer'}>
+              <ErrorMessage />
+            </div> */}
+
            </div>
          </div>
         </ThemeContext.Provider>
