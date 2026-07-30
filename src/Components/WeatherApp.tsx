@@ -3,6 +3,7 @@ import ReactSwitch from "react-switch";
 import Search from '@/Components/Search'
 import TempToggle from '@/Components/TempToggle'
 
+
 interface ThemeContextType {
   theme: string;
   toggleTheme: () => void;
@@ -39,7 +40,7 @@ export const Header = () => {
            {/*search component*/}
             <div className={'main-search-container'}>
                    <Search />
-                 <TempToggle /> 
+                   <TempToggle />
             </div>
            </div>
          </div>

@@ -57,6 +57,11 @@ body {
 }
 
 /*main section for search and temperature*/
+.main-search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .search-container {
     position: relative;
     padding: 20px 0;
@@ -229,3 +234,6 @@ body {
 
 
 /* Temperature togggle component */
+.temperature-icon {
+    display: flex;
+}
