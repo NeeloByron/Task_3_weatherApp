@@ -1,29 +1,21 @@
 import ReactSwitch from "react-switch";
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
+import { ThemeContext } from "@/Components/WeatherApp"
 
-interface ThemeContextType {
-  theme: string;
-  toggleTheme: () => void;
-}
-
-export const ThemeContext =  createContext<ThemeContextType | null>(null);
 
 export const Theme = () => {
-    const [theme, setTheme] = useState("light");
+   const context = useContext(ThemeContext);
 
-   const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
-   };
+   if (!context) return null;
+
   return (
         <>
-          <ThemeContext.Provider value={{ theme, toggleTheme}}>
             <div className={'switch-btn'}>
-              <ReactSwitch onChange={toggleTheme}
-                          checked={theme === "dark"}
+              <ReactSwitch onChange={context.toggleTheme}
+                          checked={context.theme === "dark"}
                            checkedIcon={false}
                            uncheckedIcon={false}/>
             </div>
-          </ThemeContext.Provider>
        </>
   )
 }

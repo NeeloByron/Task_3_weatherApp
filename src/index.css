@@ -278,3 +278,73 @@ body {
     width: 40rem;
     height: 15rem;
 }
+
+/* weather card*/
+.main-card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+@media (min-width: 1280px) {
+    .main-card-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.main-card-content {
+    grid-column: span 2;
+}
+
+@media (min-width: 1280px) {
+    .main-content {
+        grid-column: span 2;
+    }
+}
+
+.weatherCardContainer {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transition: all 0.5s ease;
+}
+
+.weather-card:hover {
+    background-color: rgb(255, 225, 225, 0.15);
+}
+
+.weatherCardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+/*
+.iconHolder {
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+}*/
+
+h2 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+.headerRight {
+    text-align: right;
+}
+
+.date {
+    color: rgba (255, 255, 255, 0.7);
+    font-size: 14px;
+}

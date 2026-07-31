@@ -4,6 +4,7 @@ import ErrorMessage from '@/Components/ErrorMessage'
 import React, { useState, createContext } from "react";
 import Navigation from "./Navigation";
 import Theme from './Theme';
+import WeatherCard from '@/Components/WeatherCard'
 
 interface ThemeContextType {
   theme: string;
@@ -17,8 +18,13 @@ interface WeatherAppProps {
 
 export const ThemeContext =  createContext<ThemeContextType | null>(null);
 
-export const WeatherApp = ({initialTheme= "light", toggleTheme}: WeatherAppProps) => {
+export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
  const [theme, setTheme] = useState<string>(initialTheme); 
+
+ const toggleTheme = () => {
+   setTheme(prev => prev === "light" ? "dark" : "light");
+ };
+
   return (
     <>
       <ThemeContext.Provider value={{ theme, toggleTheme}}>
@@ -42,6 +48,15 @@ export const WeatherApp = ({initialTheme= "light", toggleTheme}: WeatherAppProps
             <div className={'errorContainer'}>
               <ErrorMessage />
             </div> */}
+
+            {/*Weather card */}
+             <div className={'main-card-container'}>
+              <div className={'main-card-content'}>
+                <div className={'card-content'}>
+                  <WeatherCard />
+                </div>
+              </div>
+             </div>
 
            </div>
          </div>
