@@ -6,6 +6,7 @@ export const WeatherCard = () => {
   return (
       <>
        <div className={'weatherCardContainer'}>
+           {/*Header*/}
            <div className={'weatherCardHeader'}>
              
              <div className={'headerLeft'}>
@@ -27,6 +28,19 @@ export const WeatherCard = () => {
                 </div>
              </div>
            </div>
+
+           {/*Display */}
+           <div className={'weatherMain'}>
+             <div className={'weatherContent'}>
+               <div className={'tempContain'}>Main Temp</div>
+                <div className={'description'}>Weather Description</div>
+                 <div className={'range'}>
+                   <span>Maximum Temperature</span>
+                   <span>Minimum Temperature</span>
+                </div>
+             </div>
+           </div>
+
        </div>
       </>
   );

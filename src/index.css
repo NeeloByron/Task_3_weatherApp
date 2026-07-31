@@ -348,3 +348,38 @@ p {
     color: rgba (255, 255, 255, 0.7);
     font-size: 14px;
 }
+
+.weatherMain {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.weatherContent {
+    flex: 1;
+}
+
+.tempContain {
+   font-size: 50px;
+   font-weight: 700;
+   color: #fff;
+   margin-bottom: 12px;
+   letter-spacing: -0.025em; 
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 20px;
+  text-transform: capitalize;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.range {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
