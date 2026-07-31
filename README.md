@@ -16,3 +16,7 @@ Error-Handling
 
 APIs
 - https://medium.com/@frontendqueens/building-a-weather-app-in-react-a-beginners-guide-054c43251d40
+
+Geolocation API
+- https://velog.io/@hazae23/React-geolocation-API-hook (Translate to english)
+- https://doooodle932.tistory.com/159 (Translate to english)
