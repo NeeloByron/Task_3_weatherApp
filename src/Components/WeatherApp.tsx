@@ -1,41 +1,34 @@
-import React, { useState, createContext } from "react";
-import ReactSwitch from "react-switch";
 import Search from '@/Components/Search'
 import TempToggle from '@/Components/TempToggle'
 import ErrorMessage from '@/Components/ErrorMessage'
-
+import React, { useState, createContext } from "react";
+import Navigation from "./Navigation";
+import Theme from './Theme';
 
 interface ThemeContextType {
   theme: string;
   toggleTheme: () => void;
 }
 
+interface WeatherAppProps {
+  initialTheme?: string;
+  toggleTheme: () => void;
+}
+
 export const ThemeContext =  createContext<ThemeContextType | null>(null);
 
-export const Header = () => {
-    const [theme, setTheme] = useState("light");
-
-   const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
-   };
+export const WeatherApp = ({initialTheme= "light", toggleTheme}: WeatherAppProps) => {
+ const [theme, setTheme] = useState<string>(initialTheme); 
   return (
     <>
-     <ThemeContext.Provider value={{ theme, toggleTheme}}>
-       <div className={'main-container'} id={theme} >
-        <div className={'content-container'}>
-           {/*header*/}
-          <div className={'header-container'}>
-              <div className={'header-title'}>
-                 <h1>Weather App</h1>
-              </div>
-
-             <div className={'switch-btn'}>
-                <ReactSwitch onChange={toggleTheme}
-                          checked={theme === "dark"}
-                           checkedIcon={false}
-                           uncheckedIcon={false}/>
-              </div>
-           </div>
+      <ThemeContext.Provider value={{ theme, toggleTheme}}>
+        <div className={'main-container'} id={theme} >
+          <div className={'content-container'}>
+            {/*header*/}
+             <div className={'header-container'}>
+                <Navigation /> 
+                <Theme /> 
+             </div>
 
            {/*search component
             <div className={'main-search-container'}>
@@ -56,3 +49,5 @@ export const Header = () => {
     </>
   )
 }
+ 
+export default WeatherApp
