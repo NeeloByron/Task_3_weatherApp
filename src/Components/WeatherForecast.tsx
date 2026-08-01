@@ -31,6 +31,11 @@ export const WeatherForecast = () => {
                       {/*dynamic details*/}
                     </span>
                   </div>
+
+                  <div className={'tempInfo'}>
+                    <div className={'tempValue'}>Temperature</div>
+                    <div className={'tempMain'}>Main Temp</div>
+                  </div>
                  </div>
               </div>
             </div>

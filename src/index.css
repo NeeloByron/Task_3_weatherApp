@@ -636,3 +636,19 @@ p {
    font-size: 14px;
    font-weight: 500; 
 }
+
+.tempInfo {
+    text-align: right;
+}
+
+.tempValue {
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.tempMain {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
