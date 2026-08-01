@@ -1,5 +1,5 @@
 import React from 'react'
-import searchIcon from "@/Assets/search-icon.png"
+
 
 
 export const Search = () => {
@@ -9,9 +9,8 @@ export const Search = () => {
         <div className={'search-container'}>
           <form className={'form-container'}>
             <div className={'form-group'}>
-              <img src={searchIcon} alt={'search'} />
-              <input type={'text'} placeholder={'Search for any city....'}  />
-              <button className={'closeBtn'}>x</button>
+              
+              <input className={'searchInput'} type={'text'} placeholder={'Search for any city....'}  />
             </div>
           </form>
            
