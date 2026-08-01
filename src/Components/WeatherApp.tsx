@@ -55,6 +55,8 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
                 <div className={'card-content'}>
                   <WeatherCard />
                 </div>
+
+                {}
               </div>
              </div>
 

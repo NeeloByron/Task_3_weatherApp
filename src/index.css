@@ -401,6 +401,7 @@ p {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+    margin-bottom: 24px;
 }
 
 @media (min-width: 1024px) {
@@ -435,4 +436,63 @@ p {
 
 .iconBackground:hover {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.statLabel {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.statValue {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    padding-left: 44px;
+}
+
+.sunGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.sunCard {
+    background: linear-gradient(135deg, rgba(255,165, 0,0, 0.2), rgba(255,215,0,0.2));
+    backdrop-filter: blur(4px);
+    padding: 16px;
+    border: 1px solid rgba(255,165,0,0.2);
+}
+
+.sunHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+/*
+.sunIcon {
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+} */
+
+.fa-solid {
+    width: 20px;
+    height: 20px;
+    color: rgba(255, 165, 0, 0.8);
+}
+
+.sunLabel {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sunValue {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    padding-left: 44px;
 }

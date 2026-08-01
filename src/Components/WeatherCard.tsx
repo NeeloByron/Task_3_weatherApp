@@ -1,5 +1,6 @@
 import React from "react"
 import locationImg from '@/Assets/location.png'
+import sunImg from '@/Assets/sunny.png'
 
 
 export const WeatherCard = () => {
@@ -51,15 +52,34 @@ export const WeatherCard = () => {
                <div className={'gridItem'}>
                  <div className={'iconContent'}>
                     <div className={'gridIconHolder'}>
-                        <div className={'iconBackground'}>
-
+                        <div className={'iconBackground'}></div>
                         </div>
-                    </div>
-                </div>
-               </div>
-            </div>
-           </div>
 
+                   <div className={'statItem'}>
+                    <div>
+                     <span className={'statLabel'}>Stats Label</span>
+                    </div>
+                 <div className={'statValue'}>Stats Value</div>
+                 </div>
+                </div>  
+               </div>
+              </div>
+
+              {/*sun time*/}
+             <div className={'sunGrid'}>
+               <div className={'sunCard'}>
+                 <div className={'sunHeader'}>
+                    <div className={'sunIcon'}>
+                      <i className={'fa-solid fa-sun sunIcon'}></i>
+                    </div>
+                      <div className={'sunLabel'}>Sunrise</div>
+                     </div>
+                    <div className={'sunValue'}>
+                       {/*display */}
+                    </div>
+                   </div>
+                 </div>
+            </div>
        </div>
       </>
   );
