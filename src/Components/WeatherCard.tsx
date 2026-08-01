@@ -39,6 +39,25 @@ export const WeatherCard = () => {
                    <span>Minimum Temperature</span>
                 </div>
              </div>
+             
+             <div className={'weatherImg'}>
+               {/* display */}
+             </div>
+           </div>
+
+           <div className={'weatherGrid'}>
+             <div className={'gridContainer'}>
+               {/*display*/}
+               <div className={'gridItem'}>
+                 <div className={'iconContent'}>
+                    <div className={'gridIconHolder'}>
+                        <div className={'iconBackground'}>
+
+                        </div>
+                    </div>
+                </div>
+               </div>
+            </div>
            </div>
 
        </div>

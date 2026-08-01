@@ -383,3 +383,56 @@ p {
     color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
 }
+
+.weatherImg {
+    color: rgba(255, 255, 255, 0.9);
+    transition: transform 0.3s ease;
+}
+
+.weather-card:hover .weatherImg {
+    transform: scale(1.1);
+}
+
+.weatherGrid {
+    margin-bottom: 24px;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+@media (min-width: 1024px) {
+    .gridContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.gridItem {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(4px);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.iconContent {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.gridIconHolder {
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.iconBackground {
+    background-color: rgba (255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.iconBackground:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
