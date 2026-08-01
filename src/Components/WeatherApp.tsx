@@ -5,6 +5,7 @@ import React, { useState, createContext } from "react";
 import Navigation from "./Navigation";
 import Theme from './Theme';
 import WeatherCard from '@/Components/WeatherCard'
+import WeatherForecast from '@/Components/WeatherForecast'
 
 interface ThemeContextType {
   theme: string;
@@ -52,14 +53,19 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
             {/*Weather card */}
              <div className={'main-card-container'}>
               <div className={'main-card-content'}>
-                <div className={'card-content'}>
-                  <WeatherCard />
+                  
+                {/*weather forecast*/}
+                <div className={'forecastGrid'}>
+                  <div className={'forecastMain'}>
+                    <WeatherCard />
+                  </div>
+                   <div className={'forecastSideBar'}>
+                    <WeatherForecast />
+                  </div>
                 </div>
 
-                {}
               </div>
              </div>
-
            </div>
          </div>
         </ThemeContext.Provider>

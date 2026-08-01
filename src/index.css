@@ -289,10 +289,12 @@ body {
 @media (min-width: 1280px) {
     .main-card-container {
         grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
     }
 }
 
 .main-card-content {
+    
     grid-column: span 2;
 }
 
@@ -394,12 +396,12 @@ p {
 }
 
 .weatherGrid {
-    margin-bottom: 24px;
+    margin-bottom: 13px;
 }
 
 .gridContainer {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin-bottom: 24px;
 }
@@ -495,4 +497,142 @@ p {
     font-weight: 600;
     font-size: 18px;
     padding-left: 44px;
+}
+
+.forecastGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+@media (min-width: 1280px) {
+    .forecastGrid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 32px;
+    }
+}
+
+.forecastMain {
+    grid-column: span 1;
+}
+
+.forecastSideBar {
+    grid-column: span 1;
+}
+
+@media (min-width: 1280px) {
+    .forecastMain {
+        grid-column: span 2;
+    }
+
+    .forecastSideBar {
+        grid-column: span 1;
+    }
+}
+
+/* forecast card */ 
+.forecastCard {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.forecastHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.forecastIcon .fa-solid {
+    color: #fff;
+}
+
+.forecastTitle {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.forecastList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.forecastItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.forecastItem:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.forecastItemContent {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.forecastItemIcon {
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+.forecastItem:hover .forecastItemIcon {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.forecastItemInfo {
+    flex: 1;
+}
+
+.forecastItemDate {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.forecastDescription {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.forecastItemDetails {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.forecastItemRain {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.fa-cloud-rain {
+    width: 16px;
+    height: 16px;
+    color: #93c5fd;
+}
+
+.rainValue {
+   font-size: 14px;
+   font-weight: 500; 
 }
