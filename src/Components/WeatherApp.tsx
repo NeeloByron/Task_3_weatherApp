@@ -37,23 +37,20 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
                 <Navigation /> 
              </div>
 
-           {/*search component*/}
+           {/*search component
             <div className={'main-search-container'}>
               <Search />  
               <TempToggle />
-            </div> 
+            </div> */}
          
             {/*Error condition
             <div className={'errorContainer'}>
               <ErrorMessage />
             </div> */}
 
-            {/*Weather card 
+            {/*Weather card */}
              <div className={'main-card-container'}>
-              <div className={'main-card-content'}>
-                  
-                {/*weather forecast
-                <div className={'forecastGrid'}>
+                {/*weather forecast*/}
                   <div className={'forecastMain'}>
                     <WeatherCard />
                   </div>
@@ -61,9 +58,6 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
                     <WeatherForecast />
                   </div>
                 </div>
-
-              </div>
-             </div>*/}
            </div>
          </div>
         </ThemeContext.Provider>

@@ -48,12 +48,14 @@ body {
     gap: 15rem;
     max-width: 1200px;
     margin: 0 auto;
+    margin-bottom: 28px;
 }
 
 .header-title h1 {
     font-size: 2.5rem;
     font-weight: 700;
     color: #fff;
+    
 }
 
 /*main section for search and temperature*/
@@ -62,6 +64,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    gap: 16px;
     margin-bottom: 48px;
 }
 
@@ -69,12 +73,19 @@ body {
     .main-search-container {
         flex-direction: row;
         gap: 24px;
+        align-items: center;
     }
 }
 .search-container {
     position: relative;
     width: 100%;
-    max-width: 42rem;
+    max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .search-container >* {
+        width: auto;
+    }
 }
 
 .form-container {
@@ -93,7 +104,6 @@ body {
     transform: translateY(-50%);
     transition: color 0.3s ease;
 }
-
 
 .form-group {
    position: relative;
@@ -262,20 +272,80 @@ body {
     transition: all 0.3s ease;
 }
 
+/*Error component*/
 .errorContainer {
     max-width: 672px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.error-container-background {
-    background-color: rgb(239, 68, 68);
+.errorCard {
+    background: rgba(255, 0, 0, 0.2);
     backdrop-filter: blur(24px);
-    border: 1px solid rgba(248, 113, 113, 0.2);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     border-radius: 24px;
     padding: 32px;
     width: 40rem;
     height: 15rem;
+}
+
+.errorHeader {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.errorIcon {
+    padding: 12px;
+    background: rgba(255, 0, 0, 0.2);
+    border-radius: 50%;
+}
+.fa-circle-exclamation {
+    width: 50px;
+    height: 50px;
+    color: #fca5a5;
+}
+
+.errorTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.errorM {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 24px;
+    line-height: 1.625;
+}
+
+.retryButton {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 12px 24px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.retryButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.fa-arrow-rotate-right retry-icon {
+    width: 0px;
+    height: 50px;
+}
+
+.retryText { 
+    font-weight: 600;
 }
 
 /* weather card*/
@@ -283,11 +353,18 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 32px;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 16px;
 }
 
 @media (min-width: 1280px) {
     .main-card-container {
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        grid-template-columns: 1fr;
         gap: 32px;
     }
 }
@@ -308,20 +385,22 @@ body {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    padding: 32px;
+    padding: 23px;
+    height: 28rem;
+    width: 31rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     transition: all 0.5s ease;
 }
 
 .weather-card:hover {
-    background-color: rgb(255, 225, 225, 0.15);
+    background-color: rgba(255, 225, 225, 0.15);
 }
 
 .weatherCardHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 /*
 .iconHolder {
@@ -346,7 +425,7 @@ p {
 }
 
 .date {
-    color: rgba (255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
 }
 
@@ -354,7 +433,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 22px;
 }
 
 .weatherContent {
@@ -415,7 +494,8 @@ p {
     background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(4px);
     border-radius: 16px;
-    padding: 16px;
+    padding: 12px;
+    height: 58px;
 }
 
 .iconContent {
@@ -431,7 +511,7 @@ p {
 }
 
 .iconBackground {
-    background-color: rgba (255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
 
@@ -441,15 +521,15 @@ p {
 
 .statLabel {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
 }
 
 .statValue {
     color: #fff;
     font-weight: 600;
-    font-size: 18px;
-    padding-left: 44px;
+    font-size: 11px;
+   /* padding-left: 44px;*/
 }
 
 .sunGrid {
@@ -459,10 +539,11 @@ p {
 }
 
 .sunCard {
-    background: linear-gradient(135deg, rgba(255,165, 0,0, 0.2), rgba(255,215,0,0.2));
+    background: linear-gradient(135deg, rgba(255,165, 0, 0.2), rgba(255,215,0,0.2));
     backdrop-filter: blur(4px);
     padding: 16px;
-    border: 1px solid rgba(255,165,0,0.2);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    border-radius: 16px;
 }
 
 .sunHeader {
@@ -480,8 +561,8 @@ p {
 } */
 
 .fa-solid {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     color: rgb(226, 225, 225);
 }
 
