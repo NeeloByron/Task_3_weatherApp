@@ -1,9 +1,23 @@
 import React from "react"
 import locationImg from '@/Assets/location.png'
 import sunImg from '@/Assets/sunny.png'
+import WeatherAPI, { useWeather } from '@/Services/WeatherAPI'
 
 
 export const WeatherCard = () => {
+ const { weather, loading, error, fetchWeather } = useWeather();
+
+  React.useEffect(() => {
+  fetchWeather();
+}, []);
+
+if (loading) {
+  return <div className={'weatherCardContainer'}>loading....</div>;
+}
+ if (error) {
+  return <div className={'weatherCardContainer'}>{error}</div>
+ }
+
   return (
       <>
        <div className={'weatherCardContainer'}>
@@ -15,8 +29,8 @@ export const WeatherCard = () => {
                    <img src={locationImg} alt={'icon'}/>
                 </div>
                 <div>
-                   <h2>Weather Name</h2>
-                   <p>Weather Country</p>
+                   <h2>{weather?.name || 'Weather Name'}</h2>
+                   <p>{weather?.sys?.country}</p>
                 </div>
              </div>
             

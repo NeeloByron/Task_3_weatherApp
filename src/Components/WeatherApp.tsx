@@ -6,6 +6,8 @@ import Navigation from "./Navigation";
 import Theme from './Theme';
 import WeatherCard from '@/Components/WeatherCard'
 import WeatherForecast from '@/Components/WeatherForecast'
+import { WeatherAPI } from '@/Services/WeatherAPI'
+
 
 interface ThemeContextType {
   theme: string;
@@ -28,6 +30,7 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
 
   return (
     <>
+     <WeatherAPI>
       <ThemeContext.Provider value={{ theme, toggleTheme}}>
         <div className={'main-container'} id={theme} >
           <div className={'content-container'}>
@@ -61,6 +64,7 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
            </div>
          </div>
         </ThemeContext.Provider>
+      </WeatherAPI>
     </>
   )
 }
