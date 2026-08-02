@@ -4,6 +4,10 @@ import ErrorMessage from '@/Components/ErrorMessage'
 import React, { useState, createContext } from "react";
 import Navigation from "./Navigation";
 import Theme from './Theme';
+import WeatherCard from '@/Components/WeatherCard'
+import WeatherForecast from '@/Components/WeatherForecast'
+import { WeatherAPI } from '@/Services/WeatherAPI'
+
 
 interface ThemeContextType {
   theme: string;
@@ -17,35 +21,50 @@ interface WeatherAppProps {
 
 export const ThemeContext =  createContext<ThemeContextType | null>(null);
 
-export const WeatherApp = ({initialTheme= "light", toggleTheme}: WeatherAppProps) => {
+export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
  const [theme, setTheme] = useState<string>(initialTheme); 
+
+ const toggleTheme = () => {
+   setTheme(prev => prev === "light" ? "dark" : "light");
+ };
+
   return (
     <>
+     <WeatherAPI>
       <ThemeContext.Provider value={{ theme, toggleTheme}}>
         <div className={'main-container'} id={theme} >
           <div className={'content-container'}>
             {/*header*/}
+              <Theme /> 
              <div className={'header-container'}>
                 <Navigation /> 
-                <Theme /> 
              </div>
 
            {/*search component
             <div className={'main-search-container'}>
-                   <Search />
-             <div className={'tempToggle-main'}>      
-                   <TempToggle />
-              </div>     
+              <Search />  
+              <TempToggle />
             </div> */}
-
+         
             {/*Error condition
             <div className={'errorContainer'}>
               <ErrorMessage />
             </div> */}
 
+            {/*Weather card */}
+             <div className={'main-card-container'}>
+                {/*weather forecast*/}
+                  <div className={'forecastMain'}>
+                    <WeatherCard />
+                  </div>
+                   <div className={'forecastSideBar'}>
+                    <WeatherForecast />
+                  </div>
+                </div>
            </div>
          </div>
         </ThemeContext.Provider>
+      </WeatherAPI>
     </>
   )
 }

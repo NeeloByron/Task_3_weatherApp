@@ -1,5 +1,5 @@
 import React from 'react'
-import searchIcon from "@/Assets/search-icon.png"
+
 
 
 export const Search = () => {
@@ -9,9 +9,8 @@ export const Search = () => {
         <div className={'search-container'}>
           <form className={'form-container'}>
             <div className={'form-group'}>
-              <img src={searchIcon} alt={'search'} />
-              <input type={'text'} placeholder={'Search for any city....'}  />
-              <button className={'closeBtn'}>x</button>
+              <i className={'fa-solid fa-magnifying-glass search-icon'}></i>
+              <input className={'searchInput'} type={'text'} placeholder={'Search for any city....'} />
             </div>
           </form>
            
@@ -22,12 +21,12 @@ export const Search = () => {
                 <p>Search City..</p>
               </div>
                  {/*search button*/}
-                <button className={'searchButton'}>
-                  <div className={'text-search'}>
-                    City Name <span> City/State </span>
+              <button className={'searchButton'}>
+                <div className={'text-search'}>
+                  City Name <span> City/State </span>
                   </div>
-                    <div className={'search-country'}>Country</div>
-                       <search className={'searchInput'} />
+              <div className={'search-country'}>Country</div>
+                  <search className={'searchInput'} />
                 </button>
             </div>
           </div>
