@@ -40,16 +40,16 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
                 <Navigation /> 
              </div>
 
-           {/*search component
+           {/*search component 
             <div className={'main-search-container'}>
               <Search />  
               <TempToggle />
-            </div> */}
+            </div>*/}
          
-            {/*Error condition
+            {/*Error condition 
             <div className={'errorContainer'}>
               <ErrorMessage />
-            </div> */}
+            </div>*/}
 
             {/*Weather card */}
              <div className={'main-card-container'}>

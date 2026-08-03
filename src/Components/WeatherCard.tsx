@@ -47,8 +47,8 @@ if (loading) {
            {/*Display */}
            <div className={'weatherMain'}>
              <div className={'weatherContent'}>
-               <div className={'tempContain'}>Main Temp</div>
-                <div className={'description'}>Weather Description</div>
+               <div className={'tempContain'}>{weather?.main?.temp ? `${Math.round(weather.main.temp)}°C` : 'Main temp'}</div>
+                <div className={'description'}>{weather?.weather?.[0]?.description || 'Weather description'}</div>
                  <div className={'range'}>
                    <span>Maximum Temperature</span>
                    <span>Minimum Temperature</span>
