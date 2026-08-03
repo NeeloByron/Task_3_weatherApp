@@ -44,7 +44,7 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
             <div className={'main-search-container'}>
               <Search />  
               <TempToggle />
-            </div>*/}
+            </div> */}
          
             {/*Error condition 
             <div className={'errorContainer'}>

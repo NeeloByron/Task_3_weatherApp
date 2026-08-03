@@ -50,13 +50,16 @@ if (loading) {
                <div className={'tempContain'}>{weather?.main?.temp ? `${Math.round(weather.main.temp)}°C` : 'Main temp'}</div>
                 <div className={'description'}>{weather?.weather?.[0]?.description || 'Weather description'}</div>
                  <div className={'range'}>
-                   <span>Maximum Temperature</span>
-                   <span>Minimum Temperature</span>
+                   <span>{weather?.main?.temp_min ? `${Math.round(weather.main.temp_min)}°C` : 'Minimum Temperature'}</span>
+                   <span>{weather?.main?.temp_max ? `${Math.round(weather.main.temp_max)}°C` : 'Maximum Temperature'}</span>
                 </div>
              </div>
              
              <div className={'weatherImg'}>
-               {/* display */}
+               {weather?.weather?.[0]?.icon && (
+            <img 
+              src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} 
+              alt={weather.weather[0].description}/> )}
              </div>
            </div>
 
@@ -71,9 +74,9 @@ if (loading) {
 
                    <div className={'statItem'}>
                     <div>
-                     <span className={'statLabel'}>Stats Label</span>
+                     <span className={'statLabel'}>Humanity</span>
                     </div>
-                 <div className={'statValue'}>Stats Value</div>
+                 <div className={'statValue'}>{weather?.main?.humidity || '--'}%</div>
                  </div>
                 </div>  
                </div>
@@ -86,10 +89,10 @@ if (loading) {
                     <div className={'sunIcon'}>
                       <i className={'fa-solid fa-sun sunIcon'}></i>
                     </div>
-                      <div className={'sunLabel'}>Sunrise</div>
+                      <div className={'sunLabel'}>Wind Speed</div>
                      </div>
                     <div className={'sunValue'}>
-                       {/*display */}
+                       {weather?.wind?.speed || '--'} m/s
                     </div>
                    </div>
                  </div>
