@@ -1,4 +1,5 @@
 import React from 'react'
+import TempToggle from '@/Components/TempToggle';
 
 
 
@@ -12,27 +13,25 @@ export const Search = () => {
               <i className={'fa-solid fa-magnifying-glass search-icon'}></i>
               <input className={'searchInput'} type={'text'} placeholder={'Search for any city....'} />
             </div>
+            <TempToggle />
           </form>
            
-          <div className={'searchDropDown'}>
+          {/* <div className={'searchDropDown'}>
             <div className={'searchLoading'}>
               <div className={'search-text'}>
                 <div className={'loading-spainer'}></div>
                 <p>Search City..</p>
               </div>
-                 {/*search button*/}
+                search button
               <button className={'searchButton'}>
                 <div className={'text-search'}>
                   City Name <span> City/State </span>
                   </div>
               <div className={'search-country'}>Country</div>
                   <search className={'searchInput'} />
-                </button>
-            </div>
+                </button> 
+            </div> */}
           </div>
-          
-        </div>
-         
       </>
   );
 }

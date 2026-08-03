@@ -13,6 +13,10 @@ body {
     font-family: 'Epunda+Sans', sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
+   /* background-image: url(/src/Assets/wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; */
 }
 
 .grid-container {
@@ -23,10 +27,12 @@ body {
 
 #light {
     background-color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 #dark {
     background-color: var(--secondary-color);
+    color:  var(--primary-color);
 }
 
 #dark .themeToggle {
@@ -62,6 +68,11 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     margin-bottom: 28px;
+    background: linear-gradient(135deg, rgba(255,165, 0, 0.2), rgba(255,215,0,0.2));
+    backdrop-filter: blur(4px);
+    padding: 16px;
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    border-radius: 16px;
 }
 
 .header-title h1 {
@@ -103,6 +114,8 @@ body {
 
 .form-container {
     position: relative;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .fa-magnifying-glass {
@@ -123,7 +136,7 @@ body {
 }
 
 .search-container input {
-    padding: .6rem 10rem;
+    padding: 0.6rem 14rem;
     font-size: 1.2rem;
     border: none;
     background-color: rgba(255, 255, 255, 0.1);
@@ -399,7 +412,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 23px;
-    height: 28rem;
+    height: 23.5rem;
     width: 31rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     transition: all 0.5s ease;
@@ -564,7 +577,7 @@ p {
 .sunCard {
     background: linear-gradient(135deg, rgba(255,165, 0, 0.2), rgba(255,215,0,0.2));
     backdrop-filter: blur(4px);
-    padding: 16px;
+    padding: 13px;
     border: 1px solid rgba(255, 165, 0, 0.2);
     border-radius: 16px;
 }
@@ -573,7 +586,7 @@ p {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 14px;
+    margin-bottom: 4px;
 }
 
 /*
@@ -598,8 +611,8 @@ p {
 .sunValue {
     color: #fff;
     font-weight: 600;
-    font-size: 18px;
-    padding-left: 44px;
+    font-size: 11px;
+    padding-left: 34px;
 }
 
 .forecastGrid {

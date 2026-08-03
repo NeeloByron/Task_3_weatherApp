@@ -1,7 +1,7 @@
 import React from "react"
 import locationImg from '@/Assets/location.png'
 import sunImg from '@/Assets/sunny.png'
-import WeatherAPI, { useWeather } from '@/Services/WeatherAPI'
+import { useWeather } from '@/Services/WeatherAPI'
 
 
 export const WeatherCard = () => {
@@ -50,7 +50,7 @@ if (loading) {
                <div className={'tempContain'}>{weather?.main?.temp ? `${Math.round(weather.main.temp)}°C` : 'Main temp'}</div>
                 <div className={'description'}>{weather?.weather?.[0]?.description || 'Weather description'}</div>
                  <div className={'range'}>
-                   <span>{weather?.main?.temp_min ? `${Math.round(weather.main.temp_min)}°C` : 'Minimum Temperature'}</span>
+                   <span>{weather?.main?.temp_min ? `${Math.round(weather.main.temp_min)}°C` : 'Minimum Temperature'} /</span>
                    <span>{weather?.main?.temp_max ? `${Math.round(weather.main.temp_max)}°C` : 'Maximum Temperature'}</span>
                 </div>
              </div>
@@ -89,10 +89,10 @@ if (loading) {
                     <div className={'sunIcon'}>
                       <i className={'fa-solid fa-sun sunIcon'}></i>
                     </div>
-                      <div className={'sunLabel'}>Wind Speed</div>
+                      <span className={'sunLabel'}>Wind Speed</span>
                      </div>
                     <div className={'sunValue'}>
-                       {weather?.wind?.speed || '--'} m/s
+                       {weather?.wind?.speed ? `${weather.wind.speed} m/s` : '--'}
                     </div>
                    </div>
                  </div>
