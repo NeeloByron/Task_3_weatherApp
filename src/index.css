@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Epunda+Sans:ital,wght@0,300..900;1,300..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 :root {
-    --primary-color: #A0AEC0;
+    --primary-color: linear-gradient(135deg, #0284C7 0%, #0EA5E9 50%, #38BDF8 100%);
     --secondary-color: #1C2541;
 }
 *, *::before, *::after {
@@ -13,10 +13,10 @@ body {
     font-family: 'Epunda+Sans', sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
-   /* background-image: url(/src/Assets/wallpaper.jpg);
+    /*background-image: url(/src/Assets/FLOWERS.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center; */
+    background-position: center;*/
 }
 
 .grid-container {
@@ -26,7 +26,7 @@ body {
 }
 
 #light {
-    background-color: var(--primary-color);
+   background-color: var(--primary-color);
     color: var(--secondary-color);
 }
 
@@ -412,7 +412,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 23px;
-    height: 23.5rem;
+    height: 24.6rem;
     width: 31rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     transition: all 0.5s ease;

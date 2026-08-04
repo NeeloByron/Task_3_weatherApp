@@ -1,6 +1,4 @@
 import Search from '@/Components/Search'
-import TempToggle from '@/Components/TempToggle'
-import ErrorMessage from '@/Components/ErrorMessage'
 import React, { useState, createContext } from "react";
 import Navigation from "./Navigation";
 import Theme from './Theme';
