@@ -1,6 +1,5 @@
 import React from "react"
 import locationImg from '@/Assets/location.png'
-import sunImg from '@/Assets/sunny.png'
 import { useWeather } from '@/Services/WeatherAPI'
 
 
@@ -15,7 +14,18 @@ if (loading) {
   return <div className={'weatherCardContainer'}>loading....</div>;
 }
  if (error) {
-  return <div className={'weatherCardContainer'}>{error}</div>
+  return <div className={'weatherCardContainer'} style={{color: '#f87171'}}>{error}</div>
+ }
+
+ if (!weather) {
+  return (
+    <div className={'weatherCardContainer'}>
+      <div className={'weatherCardHeader'}>
+        <h2>No weather data</h2>
+        <p>Search for a city to get started</p>
+      </div>
+    </div>
+  );
  }
 
   return (
@@ -23,23 +33,22 @@ if (loading) {
        <div className={'weatherCardContainer'}>
            {/*Header*/}
            <div className={'weatherCardHeader'}>
-             
              <div className={'headerLeft'}>
                 <div className={'iconHolder'}>
                    <img src={locationImg} alt={'icon'}/>
                 </div>
                 <div>
-                   <h2>{weather?.name || 'Weather Name'}</h2>
-                   <p>{weather?.sys?.country}</p>
+                   <h2>{weather.name}</h2>
+                   <p>{weather?.sys?.country || 'Unknown'}</p>
                 </div>
              </div>
             
              <div className={'headerRight'}>
                <div className={'date'}>
-                {/* display */}
+                {new Date().toLocaleDateString()}
                </div>
                 <div className={'dateText'}>
-                    {/* display */}
+                    {new Date().toTimeString()}
                 </div>
              </div>
            </div>
@@ -47,10 +56,10 @@ if (loading) {
            {/*Display */}
            <div className={'weatherMain'}>
              <div className={'weatherContent'}>
-               <div className={'tempContain'}>{weather?.main?.temp ? `${Math.round(weather.main.temp)}°C` : 'Main temp'}</div>
+               <div className={'tempContain'}>{weather?.main?.temp ? `${Math.round(weather.main.temp)}°C` : '--°C'}</div>
                 <div className={'description'}>{weather?.weather?.[0]?.description || 'Weather description'}</div>
                  <div className={'range'}>
-                   <span>{weather?.main?.temp_min ? `${Math.round(weather.main.temp_min)}°C` : 'Minimum Temperature'} /</span>
+                   <span>{weather?.main?.temp_min ? `${Math.round(weather.main.temp_min)}°C` : 'Minimum Temperature'}</span>
                    <span>{weather?.main?.temp_max ? `${Math.round(weather.main.temp_max)}°C` : 'Maximum Temperature'}</span>
                 </div>
              </div>
@@ -89,15 +98,28 @@ if (loading) {
                     <div className={'sunIcon'}>
                       <i className={'fa-solid fa-sun sunIcon'}></i>
                     </div>
-                      <span className={'sunLabel'}>Wind Speed</span>
+                      <span className={'sunLabel'}>Sunrise</span>
                      </div>
                     <div className={'sunValue'}>
-                       {weather?.wind?.speed ? `${weather.wind.speed} m/s` : '--'}
+                       {weather?.sys?.sunrise? new Date(weather.sys.sunrise * 1000). toLocaleTimeString() : '--'}
                     </div>
                    </div>
+                      <div className="sunCard">
+
+                        {/*night time*/}
+                  <div className="sunHeader">
+                    <div className="sunIcon">
+                       <i className="fa-solid fa-moon"></i>
+                       </div>
+                         <span className="sunLabel">Sunset</span>
+                       </div>
+                     <div className="sunValue">
+                      {weather.sys?.sunset ? new Date(weather.sys.sunset * 1000).toLocaleTimeString() : '--'}
+                     </div>
+                   </div>
                  </div>
-            </div>
-       </div>
+               </div>
+          </div>
       </>
   );
 }

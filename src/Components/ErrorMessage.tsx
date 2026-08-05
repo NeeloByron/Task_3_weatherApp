@@ -1,5 +1,10 @@
+import React from 'react'
 
-export const ErrorMessage = () => {
+interface ErrorMessageProps {
+  message: string;
+  onRetry?: (city?: string) => Promise<void>;
+}
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, onRetry }) => {
   return (
         <>
           <div className={'errorCard'}>
@@ -9,11 +14,11 @@ export const ErrorMessage = () => {
               </div>
               <h3 className={'errorTitle'}>Something went wrong</h3>
             </div>
-             <p className={'errorM'}>Message</p>
-             <button className={'retryButton'}>
+            {/*<p className={'errorM'}>Message</p>*/}
+             {onRetry && <button onClick={() => void onRetry()} className={'retryButton'}>
                 <i className={'fa-solid fa-arrow-rotate-right retry-icon'}></i>
                 <span className={'retryText'}>Try Again</span>
-             </button>
+             </button>}
           </div>
 
         </>

@@ -13,10 +13,10 @@ body {
     font-family: 'Epunda+Sans', sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
-   /* background-image: url(/src/Assets/wallpaper.jpg);
+    /*background-image: url(/src/Assets/FLOWERS.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center; */
+    background-position: center;*/
 }
 
 .grid-container {
@@ -26,7 +26,7 @@ body {
 }
 
 #light {
-    background-color: var(--primary-color);
+   background-color: var(--primary-color);
     color: var(--secondary-color);
 }
 
@@ -50,8 +50,10 @@ body {
 /*header container */
 
 .main-container {
-    height: 100vh;
+    min-height: 100vh;
     padding: 20px 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .content-container {
@@ -68,10 +70,10 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     margin-bottom: 28px;
-    background: linear-gradient(135deg, rgba(255,165, 0, 0.2), rgba(255,215,0,0.2));
+    background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(4px);
     padding: 16px;
-    border: 1px solid rgba(255, 165, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
 }
 
@@ -197,7 +199,7 @@ body {
     top: 100%;
     left: 0px;
     right: 0px;
-    background-color: rgba(255, 255, 255, 0.1);
+    
     border-color: rgba(255, 255, 255, 0.2);
     border-radius: 1rem;
     color: rgba(255, 255, 255, 0.5);
@@ -237,7 +239,7 @@ body {
 
 .searchButton  {
     width: 100%;
-    padding: 16px 24px;
+    padding: 10px 24px;
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -412,7 +414,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 23px;
-    height: 23.5rem;
+    height: 24.6rem;
     width: 31rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     transition: all 0.5s ease;
@@ -652,7 +654,7 @@ p {
     backdrop-filter: blur(24px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    padding: 32px;
+    padding: 18px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 

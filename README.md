@@ -19,4 +19,4 @@ APIs
 
 Geolocation API
 - https://velog.io/@hazae23/React-geolocation-API-hook (Translate to english)
-- https://doooodle932.tistory.com/159 (Translate to english)
+- https://www.bigdatacloud.com/blog/new-feature-update-free-client-side-reverse-geocoding-api-with-ip-geolocation-fallback
