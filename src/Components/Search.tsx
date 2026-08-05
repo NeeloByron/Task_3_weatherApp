@@ -59,22 +59,34 @@ export const Search = () => {
             <TempToggle />
           </form>
            
-           {/*<div className={'searchDropDown'}>
+      {/* Dropdown suggestions */}
+       {suggestions.length > 0 && (
+        <div className={'searchDropDown'}>
+          {isLoading ? (
             <div className={'searchLoading'}>
-              <div className={'search-text'}>
-                <div className={'loading-spainer'}></div>
-                <p>Search City..</p>
-              </div>
-                search button
-              <button className={'searchButton'}>
+              <div className={'loading-spinner'}></div>
+              <p>Search city....</p>
+            </div>
+          ) : (
+            suggestions.map((city, index) => (
+              <button
+                key={index}
+                className={'searchButton'}
+                onClick={() => handleSuggestionClick(city)}
+              >
                 <div className={'text-search'}>
-                  City Name <span> City/State </span>
-                  </div>
-              <div className={'search-country'}>Country</div>
-                  <search className={'searchInput'} />
-                </button> 
-            </div> */}
-          </div>
+                  {city.name} 
+                  {city.state && <span> {city.state}</span>}
+                </div>
+                <div className={'search-country'}>{city.country}</div>
+              </button>
+              
+            ))
+          )}
+        </div>
+      )}
+    </div>
+
       </>
   );
 }
