@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useWeather } from '@/Services/WeatherAPI';
 import ErrorMessage from '@/Components/ErrorMessage'
+
 
 export const WeatherForecast = () => {
   const { forecast, loading, error, fetchForecast } = useWeather();
@@ -70,7 +71,17 @@ export const WeatherForecast = () => {
          </div> 
 
          <div className={'forecastList'}>
+          {dailyForecast.map((item, index) => {
+            const date = new Date(item.dt * 1000);
+            const dayName = date.toLocaleDateString('en-US', { weekday: 'short'});
+            const monthDay = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric'});
+            const temp = Math.round(item.main.temp);
+            const feelsLike = Math.round(item.main.temp);
+            const description = item.weather?.[0]?.description || 'weather description';
+            const icon = item.weather?.[0]?.icon;
+            const humidity = item.main.humidity
           
+          return(
           <div className={'forecastItem'}>
             <div className={'forecastItemContent'}>
               <div className={'forecastItemIcon'}>
@@ -84,22 +95,23 @@ export const WeatherForecast = () => {
               </div>
                  
                  <div className={'forecastItemDetails'}>
-                  <div className={'forecastItemRain'}>
-                    <i className={'fa-solid fa-cloud-rain'}></i>
-                    <span className={'rainValue'}>
-                      {/*dynamic details*/}
-                    </span>
-                  </div>
+                   <div className={'forecastItemRain'}>
+                     <i className={'fa-solid fa-cloud-rain'}></i>
+                      <span className={'rainValue'}>
+                       {/*dynamic details*/}
+                      </span>
+                   </div>
                   <div className={'tempInfo'}>
                     <div className={'tempValue'}>Temperature</div>
                     <div className={'tempMain'}>Main Temp</div>
-                  </div>
+                   </div>
                  </div>
-              </div>
-            </div>
-          
-         </div>
-      </div>
+               </div>
+             </div>
+             )
+           })}
+          </div>
+       </div>
     </>
   );
 }
