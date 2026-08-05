@@ -51,9 +51,10 @@ export const Search = () => {
         <div className={'search-container'}>
           <form className={'form-container'} onSubmit={handleSubmit}>
             <div className={'form-group'}>
-              <i className={'fa-solid fa-magnifying-glass search-icon'}></i>
-              <input className={'searchInput'} type={'text'} placeholder={'Search for any city....'} value={query} onChange={handleInputChange}/>
               <button className={'searchSubmitBtn'} type={'submit'} disabled={loading}>{loading ? '...' : 'Search'}</button>
+              {/*<i className={'fa-solid fa-magnifying-glass search-icon'}></i>*/}
+              <input className={'searchInput'} type={'text'} placeholder={'Search for any city....'} value={query} onChange={handleInputChange}/>
+              
             </div>
             <TempToggle />
           </form>
