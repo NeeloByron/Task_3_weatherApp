@@ -70,11 +70,11 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     margin-bottom: 28px;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(4px);
+    background-color:rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(24px);
     padding: 16px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
+    border-radius: 12px;
 }
 
 .header-title h1 {
