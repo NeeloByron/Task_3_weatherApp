@@ -30,37 +30,38 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
     <>
      <WeatherAPI>
       <ThemeContext.Provider value={{ theme, toggleTheme}}>
-        <div className={'main-container'} id={theme} >
-          <div className={'content-container'}>
-            {/*header*/}
+         <div className={'main-container'} id={theme} >
+           <div className={'content-container'}>
+             {/*header*/}
               
-             <div className={'header-container'}>
+              <div className={'header-container'}>
                 <Navigation /> 
                 <Theme /> 
-             </div>
+              </div>
 
-           {/*search component */}
+            {/*search component */}
             <div className={'main-search-container'}>
               <Search />  
             </div> 
          
             {/*Error condition 
-            <div className={'errorContainer'}>
+             <div className={'errorContainer'}>
               <ErrorMessage />
-            </div>*/}
+             </div>*/}
 
-            {/*Weather card */}
+             {/*Weather card */}
              <div className={'main-card-container'}>
                 {/*weather forecast*/}
                   <div className={'forecastMain'}>
                     <WeatherCard />
-                  </div>
-                   <div className={'forecastSideBar'}>
-                    <WeatherForecast />
-                  </div>
+                      </div>
+
+                 <div className={'forecastSideBar'}>
+                  <WeatherForecast />
                 </div>
-           </div>
-         </div>
+              </div>
+            </div>
+          </div>
         </ThemeContext.Provider>
       </WeatherAPI>
     </>
