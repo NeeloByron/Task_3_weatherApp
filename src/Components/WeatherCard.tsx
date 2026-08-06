@@ -64,11 +64,11 @@ if (loading) {
            {/*Display */}
            <div className={'weatherMain'}>
              <div className={'weatherContent'}>
-               <div className={'tempContain'}>{weather?.main?.temp ? `${Math.round(weather.main.temp)}°C` : '--°C'}</div>
+               <div className={'tempContain'}>{weather?.main?.temp !== undefined ? `${Math.round(weather.main.temp)}°C` : '--°C'}</div>
                 <div className={'description'}>{weather?.weather?.[0]?.description || 'Weather description'}</div>
                  <div className={'range'}>
-                   <span>{weather?.main?.temp_min ? `${Math.round(weather.main.temp_min)}°C` : 'Minimum Temperature'}</span>
-                   <span>{weather?.main?.temp_max ? `${Math.round(weather.main.temp_max)}°C` : 'Maximum Temperature'}</span>
+                   <span>Low: {weather?.main?.temp_min ? `${Math.round(weather.main.temp_min)}°C` : 'Minimum Temperature'}</span>
+                   <span>High: {weather?.main?.temp_max ? `${Math.round(weather.main.temp_max)}°C` : 'Maximum Temperature'}</span>
                 </div>
              </div>
              
@@ -87,10 +87,11 @@ if (loading) {
                  <div className={'iconContent'}>
                    <div className={'gridIconHolder'}>
                      <div className={'iconBackground'}></div>
+                      {/*display humidity icon*/}
                        </div>
                     <div className={'statItem'}>
                   <div>
-                     <span className={'statLabel'}>Humanity</span>
+                     <span className={'statLabel'}>Humidity</span>
                   </div>
                      <div className={'statValue'}>{weather?.main?.humidity || '--'}%</div>
                  </div>
