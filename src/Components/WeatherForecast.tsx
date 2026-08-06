@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useWeather } from '@/Services/WeatherAPI';
 import ErrorMessage from '@/Components/ErrorMessage'
+
 
 export const WeatherForecast = () => {
   const { forecast, loading, error, fetchForecast } = useWeather();
@@ -70,36 +71,51 @@ export const WeatherForecast = () => {
          </div> 
 
          <div className={'forecastList'}>
+          {dailyForecast.map((item, index) => {
+            const date = new Date(item.dt * 1000);
+            const dayName = date.toLocaleDateString('en-US', { weekday: 'short'});
+            const monthDay = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric'});
+            const temp = Math.round(item.main.temp);
+            const feelsLike = Math.round(item.main.temp);
+            const description = item.weather?.[0]?.description || 'weather description';
+            const icon = item.weather?.[0]?.icon;
+            const humidity = item.main.humidity
           
-          <div className={'forecastItem'}>
+          return(
+          <div className={'forecastItem'} key={index}>
             <div className={'forecastItemContent'}>
               <div className={'forecastItemIcon'}>
-                {/*display*/}
+                {icon && (
+                  <img src={`https://openweathermap.org/img/wn/${icon}.png`} 
+                       alt={description}
+                       style={{ width: '30px', height: '30px'}} />
+                )}
                  <div className={'forecastItemInfo'}>
                   <div className={'forecastItemDate'}>
-                     {/*conditional date*/}
+                     {dayName} <span className={'forecastDate'}>{monthDay}</span>
                     </div>
-                    <div className={'forecastDescription'}>Weather Description</div>
+                    <div className={'forecastDescription'}>{description}</div>
                  </div>
               </div>
                  
                  <div className={'forecastItemDetails'}>
-                  <div className={'forecastItemRain'}>
-                    <i className={'fa-solid fa-cloud-rain'}></i>
-                    <span className={'rainValue'}>
-                      {/*dynamic details*/}
-                    </span>
-                  </div>
+                   <div className={'forecastItemRain'}>
+                     
+                      <span className={'rainValue'}>
+                       {humidity}%
+                      </span>
+                   </div>
                   <div className={'tempInfo'}>
-                    <div className={'tempValue'}>Temperature</div>
-                    <div className={'tempMain'}>Main Temp</div>
-                  </div>
+                    <div className={'tempValue'}>{temp}°C</div>
+                    <div className={'tempMain'}>Feels {feelsLike}°C</div>
+                   </div>
                  </div>
-              </div>
-            </div>
-          
-         </div>
-      </div>
+               </div>
+             </div>
+             )
+           })}
+          </div>
+       </div>
     </>
   );
 }

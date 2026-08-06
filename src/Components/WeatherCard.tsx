@@ -39,16 +39,24 @@ if (loading) {
                 </div>
                 <div>
                    <h2>{weather.name}</h2>
-                   <p>{weather?.sys?.country || 'Unknown'}</p>
+                   <p>{weather?.sys?.country === 'ZA' ? 'South Africa' : (weather?.sys?.country || 'Unknown') }</p>
                 </div>
              </div>
             
              <div className={'headerRight'}>
                <div className={'date'}>
-                {new Date().toLocaleDateString()}
+                {new Date().toLocaleDateString('en-GB',{
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric'
+                })}
                </div>
                 <div className={'dateText'}>
-                    {new Date().toTimeString()}
+                    {new Date().toLocaleTimeString('en-GB', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: false
+                    })} SAST
                 </div>
              </div>
            </div>
@@ -74,18 +82,47 @@ if (loading) {
 
            <div className={'weatherGrid'}>
              <div className={'gridContainer'}>
-               {/*display*/}
+               {/*Humidity*/}
                <div className={'gridItem'}>
                  <div className={'iconContent'}>
-                    <div className={'gridIconHolder'}>
-                        <div className={'iconBackground'}></div>
-                        </div>
-
-                   <div className={'statItem'}>
-                    <div>
+                   <div className={'gridIconHolder'}>
+                     <div className={'iconBackground'}></div>
+                       </div>
+                    <div className={'statItem'}>
+                  <div>
                      <span className={'statLabel'}>Humanity</span>
+                  </div>
+                     <div className={'statValue'}>{weather?.main?.humidity || '--'}%</div>
+                 </div>
+                </div>  
+               </div>
+                 
+                 {/*wind speed*/}
+               <div className={'gridItem'}>
+                 <div className={'iconContent'}>
+                   <div className={'gridIconHolder'}>
+                      <div className={'iconBackground'}></div>
+                        </div>
+                   <div className={'statItem'}>
+                     <div>
+                        <span className={'statLabel'}>Wind Speed</span>
                     </div>
-                 <div className={'statValue'}>{weather?.main?.humidity || '--'}%</div>
+                   <div className={'statValue'}>{weather?.wind?.speed || '--'} m/s</div>
+                 </div>
+                </div>  
+               </div>
+
+                {/*temperature*/}
+               <div className={'gridItem'}>
+                 <div className={'iconContent'}>
+                   <div className={'gridIconHolder'}>
+                      <div className={'iconBackground'}></div>
+                        </div>
+                   <div className={'statItem'}>
+                     <div>
+                        <span className={'statLabel'}>Temperature</span>
+                    </div>
+                   <div className={'statValue'}>{weather?.wind?.speed || '--'} m/s</div>
                  </div>
                 </div>  
                </div>
