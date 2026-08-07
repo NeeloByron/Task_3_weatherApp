@@ -39,7 +39,7 @@ if (loading) {
                  </div>
                  <div>
                    <h2>{weather.name}</h2>
-                   <p>{weather?.sys?.country === 'ZA' ? 'South Africa' : (weather?.sys?.country || 'Unknown') }</p>
+                   <p>{weather?.sys?.country === 'ZA' ? new Intl.DisplayNames(['en'], {type: 'region'}).of(weather.sys.country) : 'Unknown'}</p>
                  </div>
                </div>
             
@@ -168,14 +168,20 @@ if (loading) {
                   <h2 className={'hourlyForecastTitle'}>Hourly Forecast</h2>
               </div>
 
-              {/*listt*/}
+              {/*list
               <div className={'hourlyForecastList'}>
                 <div className={'hourlyForecastItem'}>
                   <div className={'hourlyForecastContent'}>
+                    <div className={'hourlyBackground'}>
+   
+                    </div>
 
+                    <div>
+                      
+                    </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div> 
           </div>
       </div>

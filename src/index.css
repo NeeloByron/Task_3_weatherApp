@@ -13,7 +13,7 @@ body {
     font-family: 'Epunda+Sans', sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
-    /*background-image: url(/src/Assets/FLOWERS.jpg);
+   /* background-image: url(/src/Assets/Le.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;*/
@@ -26,7 +26,7 @@ body {
 }
 
 #light {
-   background-color: var(--primary-color);
+    background-color: var(--primary-color);
     color: var(--secondary-color);
 }
 
@@ -415,7 +415,7 @@ body {
     border-radius: 12px;
     padding: 23px;
     height: 44.90rem;
-    width: 31rem;
+    width: 42rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     transition: all 0.5s ease;
 }
@@ -707,6 +707,7 @@ p {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 18px;
+    width: 34rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
