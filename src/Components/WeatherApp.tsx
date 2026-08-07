@@ -5,6 +5,7 @@ import Theme from './Theme';
 import WeatherCard from '@/Components/WeatherCard'
 import WeatherForecast from '@/Components/WeatherForecast'
 import { WeatherAPI } from '@/Services/WeatherAPI'
+import WeatherHourlyForecast from '@/Components/WeatherHourlyForecast'
 
 
 interface ThemeContextType {
@@ -50,11 +51,14 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
              </div>*/}
 
              {/*Weather card */}
-             <div className={'main-card-container'}>
+             <div className={'mainCardContainer'}>
                 {/*weather forecast*/}
                   <div className={'forecastMain'}>
                     <WeatherCard />
+                      <div className={'hourlyForecastContainer'}>
+                        <WeatherHourlyForecast />
                       </div>
+                    </div>
 
                  <div className={'forecastSideBar'}>
                   <WeatherForecast />

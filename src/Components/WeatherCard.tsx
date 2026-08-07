@@ -157,34 +157,7 @@ if (loading) {
               </div>
             </div>
           </div>
-
-          <div className={'hourlyForecastContainer'}>
-            <div className={'hourlyForecastCard'}>
-              {/*header*/}
-              <div className={'hourlyForecastHeader'}>
-                   <div className={'hourlyForecastIcon'}>
-                     <i className={'fa-solid fa-clock'}></i>
-                   </div>
-                  <h2 className={'hourlyForecastTitle'}>Hourly Forecast</h2>
-              </div>
-
-              {/*list
-              <div className={'hourlyForecastList'}>
-                <div className={'hourlyForecastItem'}>
-                  <div className={'hourlyForecastContent'}>
-                    <div className={'hourlyBackground'}>
-   
-                    </div>
-
-                    <div>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-            </div> 
-          </div>
-      </div>
+       </div>
       </>
   );
 }
