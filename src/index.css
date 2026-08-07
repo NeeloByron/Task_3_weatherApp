@@ -622,6 +622,53 @@ p {
     padding-left: 34px;
 }
 
+/*hourly forecast*/
+
+@media (min-width: 1280px) {
+    .hourlyForecastContainer {
+        grid-column: span 2;
+    }
+}
+.hourlyForecastCard {
+    background-color: rgba(255, 255, 255, 0.0);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) ;
+    transition: all 0.5s ease;
+}
+
+.hourlyForecastHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.fa-clock {
+   color: #fff;
+}
+
+.hourlyForecastTitle {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.hourlyForecastList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.hourlyForecastContent {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
 .forecastGrid {
     display: grid;
     grid-template-columns: 1fr;
