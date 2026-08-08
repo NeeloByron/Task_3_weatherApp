@@ -62,37 +62,62 @@ body {
     margin-right: auto;
 }
 
-.header-container {
+.headerContainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 15rem;
+    gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
     margin-bottom: 28px;
     background-color:rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(24px);
-    padding: 16px;
+    padding: 16px 50px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
+    width: 100%;
+    position: relative;
+    z-index: 9999;
 }
 
-.header-title h1 {
+@media (max-width: 768px) {
+    .headerContainer {
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 12px 16px;
+    }
+}
+
+.headerContainer >*:first-child {
+    flex-shrink: 0;
+}
+
+.headerContainer >*:last-child {
+    flex-shrink: 0;
+}
+
+.headerTitle h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #fff;
-    
+    color: #fff; 
+}
+
+.headerContainerRight {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
 }
 
 /*main section for search and temperature*/
-.main-search-container {
+.mainSearchContainer {
     display: flex;
-    flex-direction: column;
+    flex: 1;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    gap: 16px;
-    margin-bottom: 48px;
+    max-width: 500px;
+    margin: 0 auto;
+    z-index: 9999;
 }
 
 @media (min-width: 1024px) {
@@ -114,10 +139,41 @@ body {
     }
 }
 
-.form-container {
+@media (max-width: 768px) {
+    .headerContainer {
+        flex-wrap: wrap;
+        gap: 0.75px;
+        padding: 12px 16px;
+    }
+
+    .mainSearchContainer {
+        order: 3;
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-top: 0.25rem;
+    }
+
+    .headerRight {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .headerContainer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .headerRight {
+        align-self: flex-end;
+        margin-top: -2.5rem;
+    }
+}
+
+.formContainer {
     position: relative;
-    display: flex;
-    justify-content: space-evenly;
+    width: 100%;
 }
 
 .fa-magnifying-glass {
@@ -133,12 +189,15 @@ body {
     transition: color 0.3s ease;
 }
 
-.form-group {
+.formGroup {
    position: relative;
+   width: 100%;
+   display: flex;
+   align-items: center;
 }
 
-.search-container input {
-    padding: 0.6rem 14rem;
+.searchInput {
+    padding: 0.6rem 3rem 0.6rem 1rem;
     font-size: 1.2rem;
     border: none;
     background-color: rgba(255, 255, 255, 0.1);
@@ -148,10 +207,21 @@ body {
     transition: all 300ms ease;
     width: 100%;
     border-radius: 1rem;
+    height: 38px;
+}
+
+.searchInput::placeholder{
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .search-container input::placeholder {
     color: rgba(255, 255, 255, 0.5);
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 .search-container input:focus{
@@ -168,21 +238,25 @@ body {
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
-.fa-xmark {
+.searchSubmitBtn {
     background: transparent;
     border: none;
+    align-items: center;
+    justify-content: center;
     transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     position: absolute;
     cursor: pointer;
     transition: all 0.3s ease;
-    right: 56px;
+    right: 4px;
     top: 50%;
     border-radius: 50%;
     border: none;
-    width: 40px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
+    z-index: 2;
 }
 
 .closeBtn:hover {
@@ -199,14 +273,15 @@ body {
     top: 100%;
     left: 0px;
     right: 0px;
-    
-    border-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 1rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: #fff;
     backdrop-filter: blur(24px);
+    background: rgba(0, 0, 0, 0.85);
     overflow: hidden;
-    z-index: 50;
+    z-index: 9999;
     margin-top: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes spin {
@@ -276,28 +351,39 @@ body {
 .tempToggle-main {
    background-color: rgba(255, 255, 255, 0.1);
    backdrop-filter: blur(24px);
-   border: 1px solid rgba(255, 255, 255, 0.3);
+   border: 1px solid rgba(255, 255, 255, 0.2);
    border-radius: 1rem;
+   padding: 2px;
 }
 
-.toggleBtn-container {
+.toggleBtnContainer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4.5rem;
-    height: 2.5rem;
-    gap: 10px;
+    gap: 2px;
+    padding: 3px;
 }
 
 .toggleBtn {
-    padding: 7px;
-    border-radius: 1rem;
+    padding: 6px 10px;
+    border-radius: 0.75rem;
     font-size: 0.9rem;
-    font-weight: 540;
+    font-weight: 500;
     border: none;
+    background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.5);
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.toggleBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.toggleBtn:active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
 /*Error component*/

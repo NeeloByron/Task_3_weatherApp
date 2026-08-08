@@ -3,7 +3,7 @@
 export const TempToggle = () => {
   return (
        <>
-          <div className={'toggleBtn-container'}>
+          <div className={'toggleBtnContainer'}>
             <button className={'toggleBtn'}>°C</button>
             <button className={'toggleBtn'}>°F</button>
           </div>

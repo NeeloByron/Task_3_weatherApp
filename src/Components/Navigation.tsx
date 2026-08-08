@@ -3,9 +3,9 @@
 export const Navigation = () => {
   return (
         <>
-          <div className={'header-title'}>
-                 <h1>Weather Application</h1>
-              </div>
+         <div className={'headerTitle'}>
+            <h1>Weather</h1>
+          </div>
         </>
   )
 }

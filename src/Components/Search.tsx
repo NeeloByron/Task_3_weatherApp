@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import TempToggle from '@/Components/TempToggle';
 import { useWeather } from '@/Services/WeatherAPI';
 
 interface GeoCity {
@@ -48,15 +47,32 @@ export const Search = () => {
   return (
       <> 
         {/*search container*/}
-        <div className={'search-container'}>
-          <form className={'form-container'} onSubmit={handleSubmit}>
-            <div className={'form-group'}>
-              <button className={'searchSubmitBtn'} type={'submit'} disabled={loading}>{loading ? '...' : 'Search'}</button>
-              {/*<i className={'fa-solid fa-magnifying-glass search-icon'}></i>*/}
-              <input className={'searchInput'} type={'text'} placeholder={'Search for any city....'} value={query} onChange={handleInputChange}/>
-              
+        <div className={'searchContainer'}>
+          <form className={'formContainer'} onSubmit={handleSubmit}>
+            <div className={'formGroup'}>
+              <input className={'searchInput'}
+                          type={'text'} 
+                   placeholder={'Search for any city....'} 
+                         value={query} 
+                      onChange={handleInputChange}
+                      onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleSubmit(e);}}}/>
+              <button 
+              className={'searchSubmitBtn'} 
+              type={'submit'} 
+              disabled={loading}>
+              {loading ? (
+                <div className="loading-spinner"></div>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="11" cy="11" r="8"/>      
+                  <path d="M21 21l-4.3-4.3"/>
+                </svg>
+              )}
+            </button>
             </div>
-            <TempToggle />
           </form>
            
       {/* Dropdown suggestions */}

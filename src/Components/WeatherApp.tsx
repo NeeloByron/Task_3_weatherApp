@@ -6,6 +6,7 @@ import WeatherCard from '@/Components/WeatherCard'
 import WeatherForecast from '@/Components/WeatherForecast'
 import { WeatherAPI } from '@/Services/WeatherAPI'
 import WeatherHourlyForecast from '@/Components/WeatherHourlyForecast'
+import TempToggle from '@/Components/TempToggle';
 
 
 interface ThemeContextType {
@@ -33,18 +34,21 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
       <ThemeContext.Provider value={{ theme, toggleTheme}}>
          <div className={'main-container'} id={theme} >
            <div className={'content-container'}>
-             {/*header*/}
-              
-              <div className={'header-container'}>
-                <Navigation /> 
-                <Theme /> 
-              </div>
 
-            {/*search component */}
-            <div className={'main-search-container'}>
-              <Search />  
-            </div> 
-         
+             {/*header*/}
+              <div className={'headerContainer'}>
+                 <Navigation /> 
+                  {/*search component */}
+                   <div className={'mainSearchContainer'}>
+                      <Search />  
+                   </div> 
+                 
+                 <div className={'headerContainerRight'}>
+                   <TempToggle />
+                   <Theme /> 
+                 </div>
+              </div>
+ 
             {/*Error condition 
              <div className={'errorContainer'}>
               <ErrorMessage />
