@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
-interface WeatherData {
+export interface WeatherData {
   name: string;
   main: {
     temp: number;
@@ -33,7 +33,7 @@ interface WeatherData {
   }
 }
 
-interface ForecastData {
+export interface ForecastData {
   list: Array<{
     dt: number;
     main: {
@@ -55,6 +55,7 @@ interface ForecastData {
       deg: number;
     };
     dt_txt: string;
+    pop?: number;
   }>;
     city: {
       name: string;
@@ -62,7 +63,7 @@ interface ForecastData {
     };
   }
 
-interface GeoCity {
+export interface GeoCity {
   name: string;
   lat: number;
   lon: number;
@@ -70,7 +71,7 @@ interface GeoCity {
   state?: string;
 }
 
-interface WeatherContextType {
+export interface WeatherContextType {
   weather: WeatherData | null;
   forecast: ForecastData | null;
   loading: boolean;
