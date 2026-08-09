@@ -69,6 +69,9 @@ export interface GeoCity {
   lon: number;
   country: string;
   state?: string;
+  local_names?: {
+    [key: string]: string;
+  };
 }
 
 export interface WeatherContextType {
@@ -76,11 +79,14 @@ export interface WeatherContextType {
   forecast: ForecastData | null;
   loading: boolean;
   error: string | null;
+  isCached: boolean;
   fetchWeather: (city? : string) => Promise<void>;
   fetchForecast: (city? : string) => Promise<void>;
   fetchWeatherByCoords: (lat: number, lon: number) => Promise<void>;
   searchCities: (query: string) => Promise<GeoCity[]>;
   clearError: () => void;
+  refreshWeather: () => Promise<void>;
+  getCachedData: (city: string) => { weather: WeatherData | null; forecast: ForecastData | null } | null;
 }
 
  const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
@@ -90,19 +96,90 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
  const [forecast, setForecast] = useState<ForecastData | null>(null);
  const [loading, setLoading] = useState(false);
  const [error, setError] = useState<string | null>(null);
+ const [isCached, setIsCached] = useState(false);
+ const [lastFetchedCity, setLastFetchedCity] = useState<string>('');
 
     const API_KEY = import.meta.env.VITE_APP_API_KEY;
     const API_URL = import.meta.env.VITE_APP_API_URL;
     const GEO_URL = import.meta.env.VITE_APP_GEO_URL;
     const DEFAULT_CITY = import.meta.env.VITE_APP_DEFAULT_CITY || 'Polokwane';
-    const UNITS = import.meta.env.VITE_APP_UNITS;
+    const UNITS = import.meta.env.VITE_APP_UNITS || 'metric';
+    const CACHE_DURATION = 30 * 60 * 1000;
+
+    //Cache//
+    const saveToCache = (city: string, weatherData: WeatherData, forecastData: ForecastData) => {
+      try {
+        const cacheData = {
+          weather: weatherData,
+          forecast: forecastData,
+          timestamp: Date.now(),
+          city: city
+        };
+        localStorage.setItem(`weather_cache_${city.toLowerCase()}`, JSON.stringify(cacheData));
+        setIsCached(false);
+      } catch (err) {
+        console.error('Error saving to cache:', err);
+      }
+    };
+
+    const getCachedData = (city: string): { weather: WeatherData | null; forecast: ForecastData | null} | null => {
+      try {
+        const cached = localStorage.getItem(`weather_cache_${city.toLowerCase()}`);
+        if (!cached) return null;
+
+        const parsed = JSON.parse(cached);
+        const isExpired = Date.now() - parsed.timestamp > CACHE_DURATION;
+
+        if (isExpired) {
+          localStorage.removeItem(`weather_cache_${city.toLowerCase()}`);
+          return null;
+        }
+
+        return {
+          weather: parsed.weather,
+          forecast: parsed.forecast
+        };
+      } catch (err) {
+        console.error('Error reading cache:', err);
+        return null;
+      }
+    };
+
+    const clearCache = (city?: string) => {
+      if (city) {
+        localStorage.removeItem(`weather_cache_${city.toLowerCase()}`);
+      } else {
+        const keys = Object.keys(localStorage);
+        keys.forEach(key => {
+          if (key.startsWith('weather_cache_')) {
+            localStorage.removeItem(key);
+          }
+        });
+      }
+    };
  
   const fetchWeather = async (city?: string) => {
     {/*location*/}
     const location = city || DEFAULT_CITY;
+    setLastFetchedCity(location);
+
+    const cachedData = getCachedData(location);
+    if (cachedData && cachedData.weather) {
+      setWeather(cachedData.weather);
+      if (cachedData.forecast) {
+        setForecast(cachedData.forecast);
+      }
+
+      setIsCached(true);
+      setError(null);
+      console.log('Using cached data for:', location);
+      return;
+    }
+
     try {
       setLoading(true);
       setError(null);
+      setIsCached(false);
 
       const response = await fetch (
         `${API_URL}/weather?q=${encodeURIComponent(location)}&appid=${API_KEY}&units=${UNITS}`
@@ -120,12 +197,29 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
 
     const data = await response.json();
     setWeather(data);
-    console.log('weather data:', data);
+    console.log('weather data:',location, data);
+
+    await fetchForecast(location);
+
+    if (forecast) {
+      saveToCache(location, data, forecast);
+    }
 
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An unknown error occured';
       setError(errorMessage);
       console.error('error:', err);
+
+      const cachedData = getCachedData(location);
+      if (cachedData && cachedData.weather) {
+        setWeather(cachedData.weather);
+        if (cachedData.forecast) {
+          setForecast(cachedData.forecast);
+        }
+        setIsCached(true);
+        setError('Showing cached data')
+        console.log('using expired cache due to error');
+      }
     } finally {
       setLoading(false);
     }
@@ -139,7 +233,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
       setError(null);
 
       const response = await fetch (
-         `${API_URL}/forecast?q=${encodeURIComponent(location)}&appid=${API_KEY}&units=${UNITS}`
+         `${API_URL}/forecast?q=${encodeURIComponent(location)}&appid=${API_KEY}&units=${UNITS}&cnt=40`
         );
 
         if (!response.ok) {
@@ -171,6 +265,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
     try {
       setLoading(true);
       setError(null);
+      setIsCached(false);
 
       const response = await fetch (
         `${API_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${UNITS}`
@@ -188,6 +283,12 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
       setWeather(data);
       console.log('Weather by coords: ', data);
 
+      await fetchForecast(data.name);
+
+      if (forecast) {
+        saveToCache(data.name, data, forecast);
+      }
+
     }  catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An unknown error occured';
       setError(errorMessage);
@@ -198,6 +299,10 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
    };
 
    const searchCities = async (query: string): Promise<GeoCity[]> => {
+    if (!query || query.trim().length < 2) {
+      return [];
+    }
+
     try {
       setError(null);
 
@@ -220,6 +325,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
         lon: city.lon,
         country: city.country,
         state: city.state || "",
+        local_names: city.local_names
       }));
 
     } catch (err) {
@@ -228,17 +334,32 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
       console.error('Error searching cities:', err);
       return [];
     }
+   };
+
+   const refreshWeather = async () => {
+    if (lastFetchedCity) {
+      clearCache(lastFetchedCity);
+      await fetchWeather(lastFetchedCity);
+    } else {
+      await fetchForecast(DEFAULT_CITY);
+    }
    }
 
   const clearError = () => setError(null);
    useEffect(() => {
-    fetchWeather();
+    fetchWeather(DEFAULT_CITY);
     fetchForecast();
+   }, []);
+
+   useEffect(() => {
+    return () => {
+      clearCache();
+    };
    }, []);
 
   return (
       <>
-        <WeatherContext.Provider value={{ weather, forecast, loading, error, fetchWeather, fetchForecast, searchCities, fetchWeatherByCoords, clearError }}>
+        <WeatherContext.Provider value={{ weather, forecast, loading, error, isCached, fetchWeather, fetchForecast, searchCities, fetchWeatherByCoords, clearError, refreshWeather, getCachedData, }}>
           {children}
         </WeatherContext.Provider>
       </>
