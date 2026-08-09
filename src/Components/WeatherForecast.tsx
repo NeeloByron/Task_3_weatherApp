@@ -88,7 +88,7 @@ export const WeatherForecast = () => {
                 {icon && (
                   <img src={`https://openweathermap.org/img/wn/${icon}.png`} 
                        alt={description}
-                       style={{ width: '30px', height: '30px'}} />
+                       style={{ width: '70px', height: '70px'}} />
                 )}
                  <div className={'forecastItemInfo'}>
                   <div className={'forecastItemDate'}>
