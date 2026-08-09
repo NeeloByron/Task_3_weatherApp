@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useWeather } from '@/Services/WeatherAPI';
+import toast from 'react-hot-toast';
 
 interface GeoCity {
   name: string;
@@ -32,18 +33,30 @@ export const Search = () => {
    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      await fetchWeather(query);
-      setQuery('');
-      setSuggestions([]);
+      try {
+       await fetchWeather(query);
+       toast.success(`showing weather for ${query}`);
+
+       setQuery('');
+       setSuggestions([]);
+    } catch (error) {
+      toast.error("Could not find that city. Please try again.");
     }
-   };  
+   }
+  };  
 
    const handleSuggestionClick = async (city: GeoCity) => {
+    try {
     await fetchWeather(city.name);
+    toast.success(`showing weather for${city.name}`);
+
     setQuery('');
     setSuggestions([]);
+   } catch (error) {
+    toast.error("Could not find that city. Please try again.")
    }
-
+  }
+ 
   return (
       <> 
         {/*search container*/}

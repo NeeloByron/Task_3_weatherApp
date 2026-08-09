@@ -1,9 +1,10 @@
 import React from "react"
 import locationImg from '@/Assets/location.png'
 import { useWeather } from '@/Services/WeatherAPI'
+import WeatherAlerts from '@/Components/WeatherAlerts'
 
 
-export const WeatherCard = () => {
+export const WeatherCard: React.FC = () => {
  const { weather, loading, error, fetchWeather } = useWeather();
 
   React.useEffect(() => {
@@ -31,6 +32,7 @@ if (loading) {
   return (
       <>
        <div className={'weatherCardContainer'}>
+         <WeatherAlerts onAlert={(message: string) => console.log('Alert', message)} />
            {/*Header*/}
            <div className={'weatherCardHeader'}>
              <div className={'headerLeft'}>

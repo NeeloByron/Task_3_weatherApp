@@ -1281,3 +1281,173 @@ p {
     height: 14px;
 }
 
+/*toastNotification*/
+.toastNotification {
+   position: fixed;
+   top: 24px;
+   right: 24px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background: rgba(239, 68, 68, 0.3);
+   backdrop-filter: blur(24px);
+   border: 1px solid rgba(239, 68, 68, 0.9);
+   border-radius: 14px;
+   padding: 16px 20px;
+   min-width: 320px;
+   max-width: 450px;
+   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+   z-index: 99999;
+   animation: slideInToast 0.5s ease forwards;
+}
+
+.toastContent {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+}
+
+.toastIcon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.toastMessage {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.toastCloseBtn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #ffffff;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.toastCloseBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.toastCloseBtn i {
+    font-size: 18px;
+}
+
+/* Alert Container */
+.alertContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.alertItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
+
+.alertItem span {
+    flex: 1;
+}
+
+.alertItem button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.alertItem button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: rotate(90deg);
+}
+
+/* Animations */
+@keyframes slideInToast {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .toastNotification {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+        min-width: auto;
+        max-width: none;
+        padding: 14px 16px;
+        border-radius: 12px;
+    }
+    
+    .toastMessage {
+        font-size: 13px;
+    }
+    
+    .toastIcon {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+@media (max-width: 480px) {
+    .toastNotification {
+        top: 70px;
+        padding: 12px 14px;
+        border-radius: 10px;
+    }
+    
+    .toastMessage {
+        font-size: 12px;
+    }
+    
+    .toastIcon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .toastCloseBtn {
+        width: 28px;
+        height: 28px;
+    }
+}
