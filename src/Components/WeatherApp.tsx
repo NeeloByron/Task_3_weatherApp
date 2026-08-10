@@ -8,7 +8,6 @@ import { WeatherAPI, useWeather } from '@/Services/WeatherAPI'
 import WeatherHourlyForecast from '@/Components/WeatherHourlyForecast'
 import TempToggle from '@/Components/TempToggle';
 import WeatherAlerts from '@/Components/WeatherAlerts'
-import ErrorMessage from '@/Components/ErrorMessage'
 
 
 interface ThemeContextType {
@@ -83,11 +82,6 @@ export const WeatherApp = ({initialTheme= 'light'}: WeatherAppProps) => {
                  </div>
               </div>
  
-            {/*Error condition 
-             <div className={'errorContainer'}>
-              <ErrorMessage />
-             </div>*/}
-
              {/*Weather card */}
              <div className={'mainCardContainer'}>
                 {/*weather forecast*/}

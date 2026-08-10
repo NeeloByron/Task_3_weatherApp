@@ -850,7 +850,7 @@ p {
 
 .hourlyTime {
     font-size: 12px;
-    color: black;
+    color: rgba(20, 20, 20);
     font-weight: 500;
 }
 
@@ -863,13 +863,13 @@ p {
 .hourlyTemp {
     font-size: 20px;
     font-weight: 700;
-    color: black;
+    color: rgba(20, 20, 20);
     white-space: nowrap;
 }
 
 .hourlyFeel {
     font-size: 11px;
-    color: black;
+    color: rgba(20, 20, 20);
     white-space: nowrap;
 }
 
@@ -891,21 +891,22 @@ p {
 
     .hourlyTemp {
         font-size: 16px;
+        color: rgba(20, 20, 20);
     }
 }
 .fa-clock {
-   color: #fff;
+   color: rgba(20, 20, 20);
 }
 
 .hourlyForecastTitle {
-    color: #fff;
-    font-weight: 600;
+    color: rgba(20, 20, 20);
+    font-weight: 500;
     font-size: 18px;
     margin: 0;
 }
 
 .hourlyForecastSubtitle {
-    color: rgba(255, 255, 255, 0.5);
+    color:rgba(20, 20, 20);
     font-size: 13px;
     margin-left: auto;
     font-weight: 400;
@@ -1023,11 +1024,11 @@ p {
 
 
 .forecastIcon .fa-solid {
-    color: black;
+    color: rgba(20, 20, 20);
 }
 
 .forecastTitle {
-    color: black;
+    color: rgba(20, 20, 20);
     font-weight: 500;
     font-size: 18px;
 }
@@ -1089,22 +1090,23 @@ p {
     flex: 1;
 }
 .forecastItemDate {
-    color: black;
+    color: rgba(20, 20, 20);
     font-weight: 540;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .forecastDescription {
-    color: black;
-    font-size: 14px;
+    color: rgba(20, 20, 20);
+    font-size: 13px;
     font-weight: 500;
     text-transform: capitalize;
 }
 
 .forecastDate {
-    color: black;
+    color: rgb(20, 20, 20);
     font-weight: 400;
     margin-left: 4px;
+    font-size: 15px;
 }
 
 .forecastItemDetails {
@@ -1118,7 +1120,7 @@ p {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: black;
+    color: rgb(20, 20, 20);
 }
 
 .fa-cloud-rain {
@@ -1140,13 +1142,13 @@ p {
 }
 
 .tempValue {
-    color: black;
+    color: rgb(20, 20, 20);
     font-weight: 500;
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .tempMain {
-    color: black;
+    color: rgba(20, 20, 20);
     font-size: 13px;
     font-weight: 500;
 }
@@ -1178,11 +1180,11 @@ p {
     }
 
     .forecastDate {
-        font-size: 14px;
+        font-size: 10px;
     }
 
     .forecastDescription {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .forecastItemDetails {

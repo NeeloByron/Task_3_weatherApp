@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useWeather } from '@/Services/WeatherAPI';
 import toast from 'react-hot-toast';
 
@@ -14,48 +14,89 @@ export const Search = () => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<GeoCity[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { fetchWeather, searchCities, loading } = useWeather();
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  const { fetchWeather, searchCities, loading, clearError } = useWeather();
   
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
 
+    clearError();
+    setShowSuggestions(true);
+
     if (value.length > 2) {
       setIsLoading(true);
+      try {
       const results = await searchCities(value);
       setSuggestions(results);
-      setIsLoading(false);
-    } else {
+      } catch (error) {
+        console.error('Search error: ', error);
+        setSuggestions([]);
+      } finally {
+        setIsLoading(false);
+      }
+
+      } else {
       setSuggestions([]);
-    }
+      }
   };
 
    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim()) {
-      try {
-       await fetchWeather(query);
-       toast.success(`showing weather for ${query}`);
 
+    if (query.trim()) {
+      clearError();
+
+    const Promise = fetchWeather(query);
+    {/*Promise toast*/}
+      toast.promise (
+        Promise, 
+        { 
+          loading: `showing weather for ${query}....`,
+          success: `Weather data loaded for ${query}...`,
+          error: `Could not find ${query}. Please try again.`,
+        },
+        {
+          duration: 4000,
+          position: 'bottom-right'
+        }  
+      );  
+      
        setQuery('');
        setSuggestions([]);
-    } catch (error) {
-      toast.error("Could not find that city. Please try again.");
+       setShowSuggestions(false);
     }
-   }
-  };  
+    };
 
    const handleSuggestionClick = async (city: GeoCity) => {
-    try {
-    await fetchWeather(city.name);
-    toast.success(`showing weather for${city.name}`);
+    clearError();
 
-    setQuery('');
-    setSuggestions([]);
-   } catch (error) {
-    toast.error("Could not find that city. Please try again.")
-   }
-  }
+    const promise = fetchWeather(city.name);
+
+    toast.promise(
+      promise,
+       {
+         loading: `Fetching weather for ${city.name}...`,
+         success: `Weather data loaded for ${city.name}`,
+         error: `Could not find ${city.name}. Please try again.`,
+       },
+       {
+         duration: 4000,
+         position: 'bottom-right',
+       }
+    );
+  };
  
   return (
       <> 
@@ -68,6 +109,7 @@ export const Search = () => {
                    placeholder={'Search for any city....'} 
                          value={query} 
                       onChange={handleInputChange}
+                      onFocus={() => setShowSuggestions(true)}
                       onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                           e.preventDefault();
@@ -89,7 +131,7 @@ export const Search = () => {
           </form>
            
       {/* Dropdown suggestions */}
-       {suggestions.length > 0 && (
+       {showSuggestions && suggestions.length > 0 && (
         <div className={'searchDropDown'}>
           {isLoading ? (
             <div className={'searchLoading'}>
@@ -99,7 +141,7 @@ export const Search = () => {
           ) : (
             suggestions.map((city, index) => (
               <button
-                key={index}
+                key={`${city.name}-${city.country}-${index}`}
                 className={'searchButton'}
                 onClick={() => handleSuggestionClick(city)}
               >
