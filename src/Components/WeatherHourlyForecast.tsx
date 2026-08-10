@@ -38,7 +38,7 @@ export const WeatherHourlyForecast: React.FC = () => {
 
             <div className={'hourlyForecastLoading'}>
               <div className={'loadingSpinner'}></div>
-                <p>No hourly data avaiab</p>
+                <p>No hourly data avaiable</p>
             </div>
         </div>
      );

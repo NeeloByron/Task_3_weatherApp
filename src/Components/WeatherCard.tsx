@@ -5,18 +5,11 @@ import WeatherAlerts from '@/Components/WeatherAlerts'
 
 
 export const WeatherCard: React.FC = () => {
- const { weather, loading, error, fetchWeather } = useWeather();
-
-  React.useEffect(() => {
-  fetchWeather();
-}, []);
+ const { weather, loading } = useWeather();
 
 if (loading) {
   return <div className={'weatherCardContainer'}>loading....</div>;
 }
- if (error) {
-  return <div className={'weatherCardContainer'} style={{color: '#f87171'}}>{error}</div>
- }
 
  if (!weather) {
   return (
@@ -29,6 +22,14 @@ if (loading) {
   );
  }
 
+ const getCountryName = (countryCode: string) => {
+  try {
+    return new Intl.DisplayNames(['en'], { type: 'region'}).of(countryCode) || countryCode;
+  } catch {
+    return countryCode;
+  }
+ };
+
   return (
       <>
        <div className={'weatherCardContainer'}>
@@ -37,11 +38,11 @@ if (loading) {
            <div className={'weatherCardHeader'}>
              <div className={'headerLeft'}>
                 <div className={'iconHolder'}>
-                   <img src={locationImg} alt={'icon'}/>
+                   <img src={locationImg} alt={'location icon'}/>
                  </div>
                  <div>
                    <h2>{weather.name}</h2>
-                   <p>{weather?.sys?.country === 'ZA' ? new Intl.DisplayNames(['en'], {type: 'region'}).of(weather.sys.country) : 'Unknown'}</p>
+                   <p>{weather?.sys?.country? getCountryName(weather.sys.country) : 'Unknown'}</p>
                  </div>
                </div>
             
@@ -57,8 +58,8 @@ if (loading) {
                     {new Date().toLocaleTimeString('en-GB', {
                       hour: '2-digit',
                       minute: '2-digit',
-                      hour12: false
-                    })} SAST
+                      hour12: true
+                    }).toUpperCase()} 
                 </div>
              </div>
            </div>
@@ -78,7 +79,8 @@ if (loading) {
                {weather?.weather?.[0]?.icon && (
             <img 
               src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} 
-              alt={weather.weather[0].description}/> )}
+              alt={weather.weather[0].description}
+              /> )}
              </div>
            </div>
 
@@ -89,10 +91,10 @@ if (loading) {
                  <div className={'iconContent'}>
                    <div className={'gridIconHolder'}>
                      <div className={'iconBackground'}></div>
-                      {/*display humidity icon*/}
+                      <i className="fa-solid fa-droplet humidityIcon"></i>
                        </div>
                     <div className={'statItem'}>
-                  <div>
+                    <div>
                      <span className={'statLabel'}>Humidity</span>
                   </div>
                      <div className={'statValue'}>{weather?.main?.humidity || '--'}%</div>
@@ -105,6 +107,7 @@ if (loading) {
                  <div className={'iconContent'}>
                    <div className={'gridIconHolder'}>
                       <div className={'iconBackground'}></div>
+                        <i className="fa-solid fa-wind windIcon"></i>
                         </div>
                    <div className={'statItem'}>
                      <div>
@@ -120,12 +123,13 @@ if (loading) {
                  <div className={'iconContent'}>
                    <div className={'gridIconHolder'}>
                       <div className={'iconBackground'}></div>
+                        <i className="fa-solid fa-temperature-three-quarters feelsLikeIcon"></i>
                         </div>
                      <div className={'statItem'}>
                       <div>
-                         <span className={'statLabel'}>Temperature</span>
+                         <span className={'statLabel'}>Feels like</span>
                       </div>
-                     <div className={'statValue'}>{weather?.wind?.speed || '--'} m/s</div>
+                     <div className={'statValue'}>{weather?.main?.feels_like !== undefined ? `${Math.round(weather.main.feels_like)}°C` : '---'} </div>
                    </div>
                   </div>  
                  </div>
@@ -141,7 +145,12 @@ if (loading) {
                       <span className={'sunLabel'}>Sunrise</span>
                       </div>
                         <div className={'sunValue'}>
-                          {weather?.sys?.sunrise? new Date(weather.sys.sunrise * 1000). toLocaleTimeString() : '--'}
+                          {weather?.sys?.sunrise? new Date(weather.sys.sunrise * 1000). toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                          }).toUpperCase()
+                          : '--'}
                         </div>
                       </div>
 
@@ -154,7 +163,12 @@ if (loading) {
                     <span className="sunLabel">Sunset</span>
                   </div>
                 <div className="sunValue">
-                  {weather.sys?.sunset ? new Date(weather.sys.sunset * 1000).toLocaleTimeString() : '--'}
+                  {weather.sys?.sunset ? new Date(weather.sys.sunset * 1000).toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                          }).toUpperCase()
+                          : '--'}
                 </div>
               </div>
             </div>

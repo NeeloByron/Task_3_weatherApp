@@ -102,7 +102,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
     const API_KEY = import.meta.env.VITE_APP_API_KEY;
     const API_URL = import.meta.env.VITE_APP_API_URL;
     const GEO_URL = import.meta.env.VITE_APP_GEO_URL;
-    const DEFAULT_CITY = import.meta.env.VITE_APP_DEFAULT_CITY || 'Polokwane';
+    const DEFAULT_CITY = import.meta.env.VITE_APP_DEFAULT_CITY;
     const UNITS = import.meta.env.VITE_APP_UNITS || 'metric';
     const CACHE_DURATION = 30 * 60 * 1000;
 

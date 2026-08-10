@@ -500,10 +500,11 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 24px;
-    height: 23.9rem; /*44.9*/
+    height: 23.9rem; 
     width: 100%;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .weather-card:hover {
@@ -520,8 +521,8 @@ body {
 }
 
 .iconHolder img {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
 }
 
 .headerLeft {
@@ -537,14 +538,14 @@ body {
 } */
 
 h2 {
-    color: black;
+    color: rgba(255, 255, 255, 0.637);
     font-weight: 600;
     font-size: 20px;
     margin: 0;
 }
 
 p {
-    color: black;
+    color: rgba(255, 255, 255, 0.637);
     font-size: 14px;
     margin: 0;
 }
@@ -556,11 +557,11 @@ p {
 .date {
     font-size: 15px;
     font-weight: 500;
-    color: black;
+    color: rgba(255, 255, 255, 0.637);
 }
 
 .dateText {
-     color: black;
+     color: rgba(255, 255, 255, 0.637);
      font-size: 13px;
      margin-top: 2px;
 }
@@ -580,13 +581,13 @@ p {
 .tempContain {
    font-size: 48px;
    font-weight: 700;
-   color: black;
+   color: rgba(255, 255, 255, 0.637);
    margin-bottom: -2px;
    letter-spacing: -0.025em; 
 }
 
 .description {
-  color: black;
+  color: rgba(255, 255, 255, 0.637);
   font-size: 18px;
   text-transform: capitalize;
   margin-bottom: 4px;
@@ -597,7 +598,7 @@ p {
     display: flex;
     align-items: center;
     gap: 20px;
-    color: black;
+    color: rgba(255, 255, 255, 0.637);
     font-size: 14px;
 }
 
@@ -607,7 +608,12 @@ p {
     transition: transform 0.3s ease;
 }
 
-.weather-card:hover .weatherImg {
+.weatherImg img {
+    width: 110px;
+    height: 110px;
+}
+
+.weatherCardContainer:hover .weatherImg img {
     transform: scale(1.1);
 }
 
@@ -637,6 +643,12 @@ p {
     height: 58px;
 }
 
+.gridItem:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
 .iconContent {
     display: flex;
     align-items: center;
@@ -645,7 +657,7 @@ p {
 }
 
 .gridIconHolder {
-    padding: 8px;
+    padding: 4px;
     border-radius: 50%;
 }
 
@@ -658,14 +670,25 @@ p {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+.gridIconHolder .humidityIcon {
+    color: #60a5fa;
+}
+.gridIconHolder .windIcon {
+    color: #93c5fd;
+}
+
+.gridIconHolder .feelsLikeIcon {
+    color: #93c5fd;
+}
+
 .statLabel {
-    color: black;
+    color: rgba(255, 255, 255, 0.637);
     font-size: 13px;
     font-weight: 500;
 }
 
 .statValue {
-    color: black;
+    color: rgba(255, 255, 255, 0.637);
     font-weight: 600;
     font-size: 11px;
    /* padding-left: 44px;*/
@@ -678,11 +701,16 @@ p {
 }
 
 .sunCard {
-    background: linear-gradient(135deg, rgba(255,165, 0, 0.2), rgba(255,215,0,0.2));
+    background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(4px);
     padding: 13px;
-    border: 1px solid rgba(255, 165, 0, 0.2);
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.sunCard:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .sunHeader {
@@ -692,13 +720,28 @@ p {
     margin-bottom: 4px;
 }
 
-/*
-.sunIcon {
-    padding: 8px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-} */
 
+.sunIcon {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 28px;
+   background: rgba(255, 255, 255, 0.1);
+   border-radius: 50%;
+   flex-shrink: 0;
+} 
+
+.sunIcon i {
+    font-size: 13px;
+}
+
+.sunCard:first-child .sunIcon i {
+    color: #fbbf24;
+}
+
+.sunCard:last-child .sunIcon i {
+    color: #334155;
+}
 .fa-solid {
     width: 18px;
     height: 18px;
@@ -706,13 +749,13 @@ p {
 }
 
 .sunLabel {
-    color: black;
+    color: rgba(255, 255, 255, 0.637);
     font-size: 14px;
     font-weight: 500;
 }
 
 .sunValue {
-    color: black;
+    color: rgba(255, 255, 255, 0.637);
     font-weight: 600;
     font-size: 11px;
     padding-left: 34px;

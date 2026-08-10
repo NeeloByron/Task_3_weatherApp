@@ -65,6 +65,7 @@ export const WeatherApp = ({initialTheme= 'light'}: WeatherAppProps) => {
     <>
      <WeatherAPI>
       <ThemeContext.Provider value={{ theme, toggleTheme}}>
+        <AutoDetectLocation />
          <div className={'main-container'} id={theme} >
            <div className={'content-container'}>
 
