@@ -484,7 +484,6 @@ body {
 }
 
 .main-card-content {
-    
     grid-column: span 2;
 }
 
@@ -538,14 +537,14 @@ body {
 } */
 
 h2 {
-    color: rgba(255, 255, 255, 0.637);
-    font-weight: 600;
-    font-size: 20px;
+    color: rgba(20, 20, 20);
+    font-weight: 500;
+    font-size: 23px;
     margin: 0;
 }
 
 p {
-    color: rgba(255, 255, 255, 0.637);
+    color: rgba(20, 20, 20);
     font-size: 14px;
     margin: 0;
 }
@@ -557,11 +556,11 @@ p {
 .date {
     font-size: 15px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.637);
+    color: rgba(20, 20, 20);
 }
 
 .dateText {
-     color: rgba(255, 255, 255, 0.637);
+     color: rgba(20, 20, 20);
      font-size: 13px;
      margin-top: 2px;
 }
@@ -580,14 +579,14 @@ p {
 
 .tempContain {
    font-size: 48px;
-   font-weight: 700;
-   color: rgba(255, 255, 255, 0.637);
+   font-weight: 500;
+   color: rgba(20, 20, 20);
    margin-bottom: -2px;
    letter-spacing: -0.025em; 
 }
 
 .description {
-  color: rgba(255, 255, 255, 0.637);
+  color: rgba(20, 20, 20);
   font-size: 18px;
   text-transform: capitalize;
   margin-bottom: 4px;
@@ -598,7 +597,7 @@ p {
     display: flex;
     align-items: center;
     gap: 20px;
-    color: rgba(255, 255, 255, 0.637);
+    color: rgba(20, 20, 20);
     font-size: 14px;
 }
 
@@ -682,14 +681,14 @@ p {
 }
 
 .statLabel {
-    color: rgba(255, 255, 255, 0.637);
+    color: rgba(20, 20, 20);
     font-size: 13px;
     font-weight: 500;
 }
 
 .statValue {
-    color: rgba(255, 255, 255, 0.637);
-    font-weight: 600;
+    color: rgba(20, 20, 20);
+    font-weight: 500;
     font-size: 11px;
    /* padding-left: 44px;*/
 }
@@ -749,16 +748,21 @@ p {
 }
 
 .sunLabel {
-    color: rgba(255, 255, 255, 0.637);
+    color: rgba(20, 20, 20);
     font-size: 14px;
     font-weight: 500;
 }
 
 .sunValue {
-    color: rgba(255, 255, 255, 0.637);
-    font-weight: 600;
+    color: rgba(20, 20, 20);
+    font-weight: 500;
     font-size: 11px;
     padding-left: 34px;
+}
+
+.hourlyPercentage {
+    color: rgba(20, 20, 20);
+    font-size: 11px;
 }
 
 /*hourly forecast*/
@@ -1017,7 +1021,7 @@ p {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 32px;
+    margin-bottom: 33px;
     flex-wrap: wrap;
 }
 
@@ -1043,7 +1047,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 27px 16px;
+    padding: 24px 16px;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(8px);
     border-radius: 12px;

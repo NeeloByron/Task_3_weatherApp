@@ -145,11 +145,6 @@ export const WeatherHourlyForecast: React.FC = () => {
                   <span>{Math.round(hour.main.temp)}°</span>
                 </div>
 
-                {/* Feels Like */}
-                <div className={'hourlyFeel'}>
-                  <span>Feels {Math.round(hour.main.feels_like)}°</span>
-                </div>
-
                 {/* Rain/Precipitation */}
                 <div className={'hourlyPercentage'}>
                   <span>{hour.pop ? Math.round(hour.pop * 100) : 0}%</span>
