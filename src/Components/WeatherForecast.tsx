@@ -99,15 +99,9 @@ export const WeatherForecast = () => {
               </div>
                  
                  <div className={'forecastItemDetails'}>
-                   <div className={'forecastItemRain'}>
-                     
-                      <span className={'rainValue'}>
-                       {humidity}%
-                      </span>
-                   </div>
                   <div className={'tempInfo'}>
                     <div className={'tempValue'}>{temp}°C</div>
-                    <div className={'tempMain'}>Feels {feelsLike}°C</div>
+                    <div className={'tempMain'}>{humidity}%</div>
                    </div>
                  </div>
                </div>

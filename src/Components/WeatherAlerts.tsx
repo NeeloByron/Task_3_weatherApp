@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useWeather } from '@/Services/WeatherAPI';
 
+
 interface WeatherAlertProps {
     onAlert?: (message: string) => void;
 }
@@ -56,9 +57,9 @@ const WeatherAlerts: React.FC<WeatherAlertProps> = ({ onAlert }) => {
             alertIcons.push('50d');
         }
 
+
         if (newAlerts.length > 0) {
             setAlerts(newAlerts);
-
             setToast({
                 show: true,
                 message: newAlerts[0],
@@ -77,24 +78,51 @@ const WeatherAlerts: React.FC<WeatherAlertProps> = ({ onAlert }) => {
         }
     }, [weather, onAlert]);
 
-    if (alerts.length === 0) {
+    if (alerts.length === 0 && !toast.show) {
         return null;
     }
 
     return (
-        <div>
-            {toast.show && (
-                <div>
-                    <img src={toast.icon} alt={toast.message} />
-                    <span>{toast.message}</span>
-                </div>
-            )}
-            <ul>
-                {alerts.map((alert, index) => (
-                    <li key={`${alert}-${index}`}>{alert}</li>
+        <>
+         {/*notification*/}
+         {toast.show && (
+          <div className={'toastNotification'}>
+             <div className={'toastContent'}>
+                 <img src={toast.icon} 
+                      alt={toast.message} 
+                      className={'toastIcon'}
+                      />
+                   <p className={'toastMessage'}>{toast.message}</p>
+                 </div>
+                <button className={'toastCloseBtn'}
+                        onClick={() => setToast(prev => ({ ...prev, show: false}))}>
+                        <i className={'fa-solid fa-xmark'}></i>
+                </button>
+            </div>
+         )}
+
+          {/*alert card*/}
+         {alerts.length > 0 && (
+          <div className={'alertContainer'}>
+           {alerts.map((alert, index) => (
+             <div key={`${alert}-${index}`} 
+                  className={'alertItem'}>
+                  <span>{alert}</span>
+            <button onClick={() =>{
+                    const newAlerts = [...alerts];
+                    newAlerts.splice(index, 1);
+                    setAlerts(newAlerts);
+                    if (newAlerts.length === 0) {
+                        setToast(prev => ({ ...prev, show: false}));
+                    }
+                 }}>
+                  <i className={'fa-solid fa-xmark'}></i>  
+                 </button>
+               </div>
                 ))}
-            </ul>
-        </div>
+            </div>
+         )}
+      </>
     );
 };
 

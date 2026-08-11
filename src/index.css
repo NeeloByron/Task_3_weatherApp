@@ -484,7 +484,6 @@ body {
 }
 
 .main-card-content {
-    
     grid-column: span 2;
 }
 
@@ -500,10 +499,11 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 24px;
-    height: 23.9rem; /*44.9*/
+    height: 23.9rem; 
     width: 100%;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .weather-card:hover {
@@ -520,8 +520,8 @@ body {
 }
 
 .iconHolder img {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
 }
 
 .headerLeft {
@@ -537,14 +537,14 @@ body {
 } */
 
 h2 {
-    color: black;
-    font-weight: 600;
-    font-size: 20px;
+    color: rgba(20, 20, 20);
+    font-weight: 500;
+    font-size: 23px;
     margin: 0;
 }
 
 p {
-    color: black;
+    color: rgba(20, 20, 20);
     font-size: 14px;
     margin: 0;
 }
@@ -556,11 +556,11 @@ p {
 .date {
     font-size: 15px;
     font-weight: 500;
-    color: black;
+    color: rgba(20, 20, 20);
 }
 
 .dateText {
-     color: black;
+     color: rgba(20, 20, 20);
      font-size: 13px;
      margin-top: 2px;
 }
@@ -579,14 +579,14 @@ p {
 
 .tempContain {
    font-size: 48px;
-   font-weight: 700;
-   color: black;
+   font-weight: 500;
+   color: rgba(20, 20, 20);
    margin-bottom: -2px;
    letter-spacing: -0.025em; 
 }
 
 .description {
-  color: black;
+  color: rgba(20, 20, 20);
   font-size: 18px;
   text-transform: capitalize;
   margin-bottom: 4px;
@@ -597,7 +597,7 @@ p {
     display: flex;
     align-items: center;
     gap: 20px;
-    color: black;
+    color: rgba(20, 20, 20);
     font-size: 14px;
 }
 
@@ -607,7 +607,12 @@ p {
     transition: transform 0.3s ease;
 }
 
-.weather-card:hover .weatherImg {
+.weatherImg img {
+    width: 110px;
+    height: 110px;
+}
+
+.weatherCardContainer:hover .weatherImg img {
     transform: scale(1.1);
 }
 
@@ -637,6 +642,12 @@ p {
     height: 58px;
 }
 
+.gridItem:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
 .iconContent {
     display: flex;
     align-items: center;
@@ -645,7 +656,7 @@ p {
 }
 
 .gridIconHolder {
-    padding: 8px;
+    padding: 4px;
     border-radius: 50%;
 }
 
@@ -658,15 +669,26 @@ p {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+.gridIconHolder .humidityIcon {
+    color: #60a5fa;
+}
+.gridIconHolder .windIcon {
+    color: #93c5fd;
+}
+
+.gridIconHolder .feelsLikeIcon {
+    color: #93c5fd;
+}
+
 .statLabel {
-    color: black;
+    color: rgba(20, 20, 20);
     font-size: 13px;
     font-weight: 500;
 }
 
 .statValue {
-    color: black;
-    font-weight: 600;
+    color: rgba(20, 20, 20);
+    font-weight: 500;
     font-size: 11px;
    /* padding-left: 44px;*/
 }
@@ -678,11 +700,16 @@ p {
 }
 
 .sunCard {
-    background: linear-gradient(135deg, rgba(255,165, 0, 0.2), rgba(255,215,0,0.2));
+    background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(4px);
     padding: 13px;
-    border: 1px solid rgba(255, 165, 0, 0.2);
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.sunCard:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .sunHeader {
@@ -692,13 +719,28 @@ p {
     margin-bottom: 4px;
 }
 
-/*
-.sunIcon {
-    padding: 8px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-} */
 
+.sunIcon {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 28px;
+   background: rgba(255, 255, 255, 0.1);
+   border-radius: 50%;
+   flex-shrink: 0;
+} 
+
+.sunIcon i {
+    font-size: 13px;
+}
+
+.sunCard:first-child .sunIcon i {
+    color: #fbbf24;
+}
+
+.sunCard:last-child .sunIcon i {
+    color: #334155;
+}
 .fa-solid {
     width: 18px;
     height: 18px;
@@ -706,16 +748,21 @@ p {
 }
 
 .sunLabel {
-    color: black;
+    color: rgba(20, 20, 20);
     font-size: 14px;
     font-weight: 500;
 }
 
 .sunValue {
-    color: black;
-    font-weight: 600;
+    color: rgba(20, 20, 20);
+    font-weight: 500;
     font-size: 11px;
     padding-left: 34px;
+}
+
+.hourlyPercentage {
+    color: rgba(20, 20, 20);
+    font-size: 11px;
 }
 
 /*hourly forecast*/
@@ -807,7 +854,7 @@ p {
 
 .hourlyTime {
     font-size: 12px;
-    color: black;
+    color: rgba(20, 20, 20);
     font-weight: 500;
 }
 
@@ -820,13 +867,13 @@ p {
 .hourlyTemp {
     font-size: 20px;
     font-weight: 700;
-    color: black;
+    color: rgba(20, 20, 20);
     white-space: nowrap;
 }
 
 .hourlyFeel {
     font-size: 11px;
-    color: black;
+    color: rgba(20, 20, 20);
     white-space: nowrap;
 }
 
@@ -848,21 +895,22 @@ p {
 
     .hourlyTemp {
         font-size: 16px;
+        color: rgba(20, 20, 20);
     }
 }
 .fa-clock {
-   color: #fff;
+   color: rgba(20, 20, 20);
 }
 
 .hourlyForecastTitle {
-    color: #fff;
-    font-weight: 600;
+    color: rgba(20, 20, 20);
+    font-weight: 500;
     font-size: 18px;
     margin: 0;
 }
 
 .hourlyForecastSubtitle {
-    color: rgba(255, 255, 255, 0.5);
+    color:rgba(20, 20, 20);
     font-size: 13px;
     margin-left: auto;
     font-weight: 400;
@@ -973,18 +1021,18 @@ p {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 32px;
+    margin-bottom: 33px;
     flex-wrap: wrap;
 }
 
 
 
 .forecastIcon .fa-solid {
-    color: black;
+    color: rgba(20, 20, 20);
 }
 
 .forecastTitle {
-    color: black;
+    color: rgba(20, 20, 20);
     font-weight: 500;
     font-size: 18px;
 }
@@ -999,7 +1047,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 27px 16px;
+    padding: 24px 16px;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(8px);
     border-radius: 12px;
@@ -1046,22 +1094,23 @@ p {
     flex: 1;
 }
 .forecastItemDate {
-    color: black;
+    color: rgba(20, 20, 20);
     font-weight: 540;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .forecastDescription {
-    color: black;
-    font-size: 14px;
+    color: rgba(20, 20, 20);
+    font-size: 13px;
     font-weight: 500;
     text-transform: capitalize;
 }
 
 .forecastDate {
-    color: black;
+    color: rgb(20, 20, 20);
     font-weight: 400;
     margin-left: 4px;
+    font-size: 15px;
 }
 
 .forecastItemDetails {
@@ -1075,7 +1124,7 @@ p {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: black;
+    color: rgb(20, 20, 20);
 }
 
 .fa-cloud-rain {
@@ -1097,13 +1146,13 @@ p {
 }
 
 .tempValue {
-    color: black;
+    color: rgb(20, 20, 20);
     font-weight: 500;
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .tempMain {
-    color: black;
+    color: rgba(20, 20, 20);
     font-size: 13px;
     font-weight: 500;
 }
@@ -1135,11 +1184,11 @@ p {
     }
 
     .forecastDate {
-        font-size: 14px;
+        font-size: 10px;
     }
 
     .forecastDescription {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .forecastItemDetails {

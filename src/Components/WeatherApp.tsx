@@ -1,12 +1,13 @@
 import Search from '@/Components/Search'
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import Navigation from "./Navigation";
 import Theme from './Theme';
 import WeatherCard from '@/Components/WeatherCard'
 import WeatherForecast from '@/Components/WeatherForecast'
-import { WeatherAPI } from '@/Services/WeatherAPI'
+import { WeatherAPI, useWeather } from '@/Services/WeatherAPI'
 import WeatherHourlyForecast from '@/Components/WeatherHourlyForecast'
 import TempToggle from '@/Components/TempToggle';
+import WeatherAlerts from '@/Components/WeatherAlerts'
 
 
 interface ThemeContextType {
@@ -16,22 +17,54 @@ interface ThemeContextType {
 
 interface WeatherAppProps {
   initialTheme?: string;
-  toggleTheme: () => void;
 }
 
 export const ThemeContext =  createContext<ThemeContextType | null>(null);
 
-export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
- const [theme, setTheme] = useState<string>(initialTheme); 
+const AutoDetectLocation: React.FC = () => {
+  const { fetchWeather, fetchWeatherByCoords } = useWeather();
+
+  useEffect(() => {
+    if (navigator.geolocation ) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log('Auto-detected location:', latitude, longitude);
+          fetchWeatherByCoords(latitude, longitude);
+        }, (error) => {
+          console.log('location permission denied/error:', error.message);
+          fetchWeather();
+        }
+      );
+    } else {
+      console.log('Geolocation not supported');
+      fetchWeather();
+    }
+  }, []);
+  return null;
+};
+
+export const WeatherApp = ({initialTheme= 'light'}: WeatherAppProps) => {
+ const [theme, setTheme] = useState<string>(() => {
+
+  const savedTheme = localStorage.getItem('theme');
+  return savedTheme || initialTheme;
+ });
 
  const toggleTheme = () => {
-   setTheme(prev => prev === "light" ? "dark" : "light");
+   setTheme(prev => {
+    const newTheme = prev === 'light' ? 'dark' : 'light';
+
+     localStorage.setItem('theme', newTheme);
+     return newTheme
+   });
  };
 
   return (
     <>
      <WeatherAPI>
       <ThemeContext.Provider value={{ theme, toggleTheme}}>
+        <AutoDetectLocation />
          <div className={'main-container'} id={theme} >
            <div className={'content-container'}>
 
@@ -49,11 +82,6 @@ export const WeatherApp = ({initialTheme= "light"}: WeatherAppProps) => {
                  </div>
               </div>
  
-            {/*Error condition 
-             <div className={'errorContainer'}>
-              <ErrorMessage />
-             </div>*/}
-
              {/*Weather card */}
              <div className={'mainCardContainer'}>
                 {/*weather forecast*/}

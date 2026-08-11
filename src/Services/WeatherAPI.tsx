@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import toast from 'react-hot-toast';
 
 export interface WeatherData {
   name: string;
@@ -80,6 +81,8 @@ export interface WeatherContextType {
   loading: boolean;
   error: string | null;
   isCached: boolean;
+  units: 'metric' | 'imperial';
+  setUnits: (units: 'metric' | 'imperial') => void;
   fetchWeather: (city? : string) => Promise<void>;
   fetchForecast: (city? : string) => Promise<void>;
   fetchWeatherByCoords: (lat: number, lon: number) => Promise<void>;
@@ -97,13 +100,15 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
  const [loading, setLoading] = useState(false);
  const [error, setError] = useState<string | null>(null);
  const [isCached, setIsCached] = useState(false);
+ const [units, setUnits] = useState<'metric' | 'imperial'>(
+    (localStorage.getItem('weather_units') as 'metric' | 'imperial') || 'metric'
+  );
  const [lastFetchedCity, setLastFetchedCity] = useState<string>('');
 
     const API_KEY = import.meta.env.VITE_APP_API_KEY;
     const API_URL = import.meta.env.VITE_APP_API_URL;
     const GEO_URL = import.meta.env.VITE_APP_GEO_URL;
     const DEFAULT_CITY = import.meta.env.VITE_APP_DEFAULT_CITY || 'Polokwane';
-    const UNITS = import.meta.env.VITE_APP_UNITS || 'metric';
     const CACHE_DURATION = 30 * 60 * 1000;
 
     //Cache//
@@ -113,7 +118,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
           weather: weatherData,
           forecast: forecastData,
           timestamp: Date.now(),
-          city: city
+          city: city,
         };
         localStorage.setItem(`weather_cache_${city.toLowerCase()}`, JSON.stringify(cacheData));
         setIsCached(false);
@@ -172,7 +177,11 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
 
       setIsCached(true);
       setError(null);
-      console.log('Using cached data for:', location);
+      toast('Showing cached weather data (offline mode)', {
+        duration: 3000,
+        position: 'bottom-right',
+        icon: '',
+      });
       return;
     }
 
@@ -182,7 +191,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
       setIsCached(false);
 
       const response = await fetch (
-        `${API_URL}/weather?q=${encodeURIComponent(location)}&appid=${API_KEY}&units=${UNITS}`
+        `${API_URL}/weather?q=${encodeURIComponent(location)}&appid=${API_KEY}&units=${units}`
       );
 
       if (!response.ok) {
@@ -233,7 +242,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
       setError(null);
 
       const response = await fetch (
-         `${API_URL}/forecast?q=${encodeURIComponent(location)}&appid=${API_KEY}&units=${UNITS}&cnt=40`
+        `${API_URL}/forecast?q=${encodeURIComponent(location)}&appid=${API_KEY}&units=${units}&cnt=40`
         );
 
         if (!response.ok) {
@@ -268,7 +277,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
       setIsCached(false);
 
       const response = await fetch (
-        `${API_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${UNITS}`
+          `${API_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${units}`
       );
 
       if (!response.ok) {

@@ -38,7 +38,7 @@ export const WeatherHourlyForecast: React.FC = () => {
 
             <div className={'hourlyForecastLoading'}>
               <div className={'loadingSpinner'}></div>
-                <p>No hourly data avaiab</p>
+                <p>No hourly data avaiable</p>
             </div>
         </div>
      );
@@ -143,11 +143,6 @@ export const WeatherHourlyForecast: React.FC = () => {
                 {/* Temperature */}
                 <div className={'hourlyTemp'}>
                   <span>{Math.round(hour.main.temp)}°</span>
-                </div>
-
-                {/* Feels Like */}
-                <div className={'hourlyFeel'}>
-                  <span>Feels {Math.round(hour.main.feels_like)}°</span>
                 </div>
 
                 {/* Rain/Precipitation */}
