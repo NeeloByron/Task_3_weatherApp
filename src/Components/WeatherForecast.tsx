@@ -35,7 +35,7 @@ export const WeatherForecast = () => {
 
    if (error) {
       return 
-        <ErrorMessage message={`${error} at text not found`} onRetry={fetchForecast} />
+        <ErrorMessage message={`${error} at text not found`} onRetry={fetchForecast} />;
     }
     if (!forecast || !forecast.list) {
       return (
