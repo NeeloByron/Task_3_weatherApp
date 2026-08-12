@@ -33,8 +33,9 @@ export const WeatherForecast = () => {
       );
     }
 
-    if (error) {
-      return <ErrorMessage message={error} onRetry={fetchForecast} />;
+   if (error) {
+      return 
+        <ErrorMessage message={`${error} at text not found`} onRetry={fetchForecast} />
     }
     if (!forecast || !forecast.list) {
       return (
@@ -57,7 +58,7 @@ export const WeatherForecast = () => {
           </div>
        </div>
       );
-    }
+    } 
     
   const dailyForecast = forecast.list.filter((_, index) => index % 8 === 0);
   return ( 
