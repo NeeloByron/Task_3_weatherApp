@@ -26,6 +26,10 @@ export const Search = () => {
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
   }, []);
 
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +53,7 @@ export const Search = () => {
 
       } else {
       setSuggestions([]);
+      setShowSuggestions(false);
       }
   };
 
@@ -58,10 +63,10 @@ export const Search = () => {
     if (query.trim()) {
       clearError();
 
-    const Promise = fetchWeather(query);
+    const promise = fetchWeather(query);
     {/*Promise toast*/}
       toast.promise (
-        Promise, 
+        promise, 
         { 
           loading: `showing weather for ${query}....`,
           success: `Weather data loaded for ${query}...`,
@@ -96,6 +101,10 @@ export const Search = () => {
          position: 'bottom-right',
        }
     );
+
+    setQuery('');
+    setSuggestions([]);
+    setShowSuggestions(false);
   };
  
   return (
