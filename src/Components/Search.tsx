@@ -15,9 +15,10 @@ export const Search = () => {
   const [suggestions, setSuggestions] = useState<GeoCity[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const { fetchWeather, searchCities, loading, clearError } = useWeather();
+  const { fetchWeather, searchCities, loading, clearError, error } = useWeather();
   
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,29 +33,42 @@ export const Search = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        duration: 4000,
+        position: 'bottom-right',
+      });
+    }
+  }, [error]);
+
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
 
     clearError();
     setShowSuggestions(true);
+    clearError();
 
     if (value.length > 2) {
+      setShowSuggestions(true);
       setIsLoading(true);
       try {
       const results = await searchCities(value);
       setSuggestions(results);
+      setHasSearched(true);
       } catch (error) {
         console.error('Search error: ', error);
         setSuggestions([]);
-      } finally {
+        setHasSearched(true);
+       } finally {
         setIsLoading(false);
       }
-
-      } else {
+    } else {
       setSuggestions([]);
       setShowSuggestions(false);
-      }
+      setHasSearched(false);
+    }
   };
 
    const handleSubmit = async (e: React.FormEvent) => {
@@ -62,10 +76,11 @@ export const Search = () => {
 
     if (query.trim()) {
       clearError();
-
+      
+    try {
     const promise = fetchWeather(query);
     {/*Promise toast*/}
-      toast.promise (
+      await toast.promise (
         promise, 
         { 
           loading: `showing weather for ${query}....`,
@@ -76,17 +91,22 @@ export const Search = () => {
           duration: 4000,
           position: 'bottom-right'
         }  
-      );  
-      
+       );  
        setQuery('');
        setSuggestions([]);
        setShowSuggestions(false);
-    }
+       setHasSearched(false);
+
+       } catch (error) {
+       console.error('Submit error:', error);
+       }
+     }
     };
 
    const handleSuggestionClick = async (city: GeoCity) => {
     clearError();
 
+    try {
     const promise = fetchWeather(city.name);
 
     toast.promise(
@@ -105,17 +125,22 @@ export const Search = () => {
     setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
+    setHasSearched(false);
+
+    } catch (error) {
+      console.error('Suggestion error:', error);
+    }
   };
  
   return (
       <> 
         {/*search container*/}
-        <div className={'searchContainer'}>
+        <div className={'searchContainer'} ref={searchRef}>
           <form className={'formContainer'} onSubmit={handleSubmit}>
             <div className={'formGroup'}>
               <input className={'searchInput'}
                           type={'text'} 
-                   placeholder={'Search for any city....'} 
+                   placeholder={'Search'} 
                          value={query} 
                       onChange={handleInputChange}
                       onFocus={() => setShowSuggestions(true)}
@@ -140,32 +165,51 @@ export const Search = () => {
           </form>
            
       {/* Dropdown suggestions */}
-       {showSuggestions && suggestions.length > 0 && (
+       {showSuggestions &&  (
         <div className={'searchDropDown'}>
           {isLoading ? (
             <div className={'searchLoading'}>
               <div className={'loading-spinner'}></div>
               <p>Search city....</p>
             </div>
-          ) : (
-            suggestions.map((city, index) => (
-              <button
-                key={`${city.name}-${city.country}-${index}`}
-                className={'searchButton'}
-                onClick={() => handleSuggestionClick(city)}
-              >
-                <div className={'text-search'}>
-                  {city.name} 
-                  {city.state && <span> {city.state}</span>}
-                </div>
-                <div className={'search-country'}>{city.country}</div>
-              </button>
-              
-            ))
-          )}
-        </div>
-      )}
-    </div>
+          ) : hasSearched && suggestions.length === 0 ? (
+              <div className={'noResults'}>
+                <svg 
+                  width="24" 
+                  height="24" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2"
+                  style={{ marginBottom: '8px' }}
+                >
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="M21 21l-4.3-4.3"/>
+                  <path d="M8 11h6" />
+                </svg>
+                <p>No cities found for "{query}"</p>
+                <span style={{ fontSize: '12px', opacity: 0.7 }}>
+                  Try checking the spelling or search for a different city
+                </span>
+              </div>
+            ) : suggestions.length > 0 ? (
+              suggestions.map((city, index) => (
+                <button
+                  key={`${city.name}-${city.country}-${index}`}
+                  className={'searchButton'}
+                  onClick={() => handleSuggestionClick(city)}
+                >
+                  <div className={'text-search'}>
+                    {city.name} 
+                    {city.state && <span> {city.state}</span>}
+                  </div>
+                  <div className={'search-country'}>{city.country}</div>
+                </button>
+              ))
+            ) : null}
+          </div>
+        )}
+      </div>
 
       </>
   );
