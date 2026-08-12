@@ -2,14 +2,19 @@ import React from "react"
 import locationImg from '@/Assets/location.png'
 import { useWeather } from '@/Services/WeatherAPI'
 import WeatherAlerts from '@/Components/WeatherAlerts'
+import ErrorMessage from './ErrorMessage';
 
 
 export const WeatherCard: React.FC = () => {
- const { weather, loading } = useWeather();
+ const { weather, loading, error, fetchForecast} = useWeather();
 
 if (loading) {
   return <div className={'weatherCardContainer'}>loading....</div>;
 }
+
+if (error) {
+    return <ErrorMessage message={error} onRetry={() => (fetchForecast?.())} />;
+  }
 
  if (!weather) {
   return (
