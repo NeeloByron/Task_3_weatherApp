@@ -42,9 +42,9 @@ if (error) {
            {/*Header*/}
            <div className={'weatherCardHeader'}>
              <div className={'headerLeft'}>
-                <div className={'iconHolder'}>
+               {/* <div className={'iconHolder'}>
                    <img src={locationImg} alt={'location icon'}/>
-                 </div>
+                 </div> */}
                  <div>
                    <h2>{weather.name}</h2>
                    <p>{weather?.sys?.country? getCountryName(weather.sys.country) : 'Unknown'}</p>
@@ -140,7 +140,7 @@ if (error) {
                  </div>
                </div>
 
-                {/*sun time*/}
+                {/*sun time
                <div className={'sunGrid'}>
                  <div className={'sunCard'}>
                     <div className={'sunHeader'}>
@@ -160,7 +160,7 @@ if (error) {
                       </div>
 
                     <div className="sunCard">
-                    {/*night time*/}
+                    {/*night time
                     <div className="sunHeader">
                       <div className="sunIcon">
                         <i className="fa-solid fa-moon"></i>
@@ -176,7 +176,8 @@ if (error) {
                           : '--'}
                 </div>
               </div>
-            </div>
+            </div>*/}
+
           </div>
        </div>
       </>

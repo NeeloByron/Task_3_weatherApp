@@ -1,8 +1,8 @@
-#Task 4 weatherApp
+<h1 align="center">Task 4 WeatherApp</h1>
 
----
+<p>Real-time weather dashboard, location auto-detection system, Hourly & daily forecasts, Multiple country and city search, theme customizations options and offline data catching</p>
 
-#Resources used
+<p>Resources</p>
 
 Custom-night-mode-toggle
 - https://dev.to/ninjasoards/make-a-custom-night-mode-toggle-w-react-css-variables-272o 
