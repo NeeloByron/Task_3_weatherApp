@@ -1,17 +1,15 @@
 import { useWeather } from "@/Services/WeatherAPI";
 import type { ForecastData } from '@/Services/WeatherAPI';
 import React from "react";
-import ErrorMessage from '@/Components/ErrorMessage';
 
 type ForecastListItem = ForecastData['list'][0];
 
 export const WeatherHourlyForecast: React.FC = () => {
-  const { forecast, loading, error, fetchForecast } = useWeather();
+  const { forecast, loading, error } = useWeather();
 
   if (error) {
-      return <ErrorMessage message={error} onRetry={fetchForecast} />;
-    }
-
+    return null;
+  }
   if (loading) {
     return(
       <div className={'hourlyForecastCard'}>

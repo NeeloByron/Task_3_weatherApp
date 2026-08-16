@@ -293,7 +293,7 @@ body {
     }
 }
 
-.loading-spainer {
+.loading-spainner {
     animation: spin 1s linear infinite;
     border-radius: 9999px;
     height: 1.5rem;

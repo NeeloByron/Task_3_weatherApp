@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useWeather } from '@/Services/WeatherAPI';
-import ErrorMessage from '@/Components/ErrorMessage'
 
 
 export const WeatherForecast = () => {
@@ -35,7 +34,7 @@ export const WeatherForecast = () => {
     }
 
    if (error) {
-      return <ErrorMessage message={error} onRetry={fetchForecast} />;
+      return null;
     }
     if (!forecast || !forecast.list) {
       return (
