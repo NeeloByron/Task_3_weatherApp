@@ -83,6 +83,7 @@ export interface WeatherContextType {
   isCached: boolean;
   units: 'metric' | 'imperial';
   setUnits: (units: 'metric' | 'imperial') => void;
+  lastFetchedCity: string;
   fetchWeather: (city? : string) => Promise<void>;
   fetchForecast: (city? : string) => Promise<void>;
   fetchWeatherByCoords: (lat: number, lon: number) => Promise<void>;
@@ -376,7 +377,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
 
   return (
       <>
-        <WeatherContext.Provider value={{ weather, forecast, loading, error, isCached, units, setUnits, fetchWeather, fetchForecast, searchCities, fetchWeatherByCoords, clearError, refreshWeather, getCachedData, }}>
+        <WeatherContext.Provider value={{ weather, forecast, loading, error, isCached, units, lastFetchedCity, setUnits, fetchWeather, fetchForecast, searchCities, fetchWeatherByCoords, clearError, refreshWeather, getCachedData, }}>
           {children}
         </WeatherContext.Provider>
       </>
