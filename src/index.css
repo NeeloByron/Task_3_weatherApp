@@ -57,7 +57,7 @@ body {
 }
 
 .content-container {
-    max-width: 80rem;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -67,12 +67,12 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0 0 28px 0;
     margin-bottom: 28px;
     background-color:rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(24px);
-    padding: 16px 50px;
+    padding: 16px 16px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     width: 100%;
@@ -465,9 +465,10 @@ body {
 /* weather card*/
 .mainCardContainer {
     display: grid;
+    align-items: stretch;
     grid-template-columns: 1fr;
     gap: 32px;
-    max-width: 1280px;
+    max-width: 100%;
     margin: 0 auto;
     width: 100%;
     padding: 0 16px;
@@ -991,20 +992,24 @@ p {
 .forecastMain {
     display: grid;
     grid-column: span 1;
+    flex: 2;
     
 }
 
 .forecastSideBar {
-    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
 }
 
 @media (min-width: 1280px) {
     .forecastMain {
         grid-column: span 2;
+        flex: 2;
     }
 
     .forecastSideBar {
         grid-column: span 1;
+        flex: 1;
     }
 }
 
@@ -1015,6 +1020,9 @@ p {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .forecastHeader {
@@ -1041,6 +1049,7 @@ p {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex: 1;
 }
 
 .forecastItem {

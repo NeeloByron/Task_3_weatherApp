@@ -100,9 +100,15 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
  const [loading, setLoading] = useState(false);
  const [error, setError] = useState<string | null>(null);
  const [isCached, setIsCached] = useState(false);
- const [units, setUnits] = useState<'metric' | 'imperial'>(
+ const [units, setUnitsState] = useState<'metric' | 'imperial'>(
     (localStorage.getItem('weather_units') as 'metric' | 'imperial') || 'metric'
   );
+
+  const setUnits = (newUnits: 'metric' | 'imperial') => {
+    localStorage.setItem('weather_units', newUnits);
+    setUnitsState(newUnits);
+  }
+ 
  const [lastFetchedCity, setLastFetchedCity] = useState<string>('');
 
     const API_KEY = import.meta.env.VITE_APP_API_KEY;
@@ -111,7 +117,6 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
     const DEFAULT_CITY = import.meta.env.VITE_APP_DEFAULT_CITY || 'Polokwane';
     const CACHE_DURATION = 30 * 60 * 1000;
 
-    //Cache//
     const saveToCache = (city: string, weatherData: WeatherData, forecastData: ForecastData) => {
       try {
         const cacheData = {
@@ -120,7 +125,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
           timestamp: Date.now(),
           city: city,
         };
-        localStorage.setItem(`weather_cache_${city.toLowerCase()}`, JSON.stringify(cacheData));
+        localStorage.setItem(`weather_cache_${city.toLowerCase()}_${units}`, JSON.stringify(cacheData));
         setIsCached(false);
       } catch (err) {
         console.error('Error saving to cache:', err);
@@ -129,14 +134,14 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
 
     const getCachedData = (city: string): { weather: WeatherData | null; forecast: ForecastData | null} | null => {
       try {
-        const cached = localStorage.getItem(`weather_cache_${city.toLowerCase()}`);
+        const cached = localStorage.getItem(`weather_cache_${city.toLowerCase()}_${units}`);
         if (!cached) return null;
 
         const parsed = JSON.parse(cached);
         const isExpired = Date.now() - parsed.timestamp > CACHE_DURATION;
 
         if (isExpired) {
-          localStorage.removeItem(`weather_cache_${city.toLowerCase()}`);
+          localStorage.removeItem(`weather_cache_${city.toLowerCase()}_${units}`);
           return null;
         }
 
@@ -152,7 +157,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
 
     const clearCache = (city?: string) => {
       if (city) {
-        localStorage.removeItem(`weather_cache_${city.toLowerCase()}`);
+        localStorage.removeItem(`weather_cache_${city.toLowerCase()}_${units}`);
       } else {
         const keys = Object.keys(localStorage);
         keys.forEach(key => {
@@ -165,6 +170,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
  
   const fetchWeather = async (city?: string) => {
     {/*location*/}
+    if (loading) return;
     const location = city || DEFAULT_CITY;
     setLastFetchedCity(location);
 
@@ -234,7 +240,7 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
     }
   };
 
- const fetchForecast = async (city?: string) => {
+ const fetchForecast = async (city?: string): Promise<ForecastData | null> => {
     const location = city || DEFAULT_CITY;
 
     try {
@@ -246,25 +252,21 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
         );
 
         if (!response.ok) {
-          if (response.status === 404) {
-            throw new Error(`City "${location}" not found. Please check spelling.`)
-          }
-          else if (response.status === 401) {
-            throw new Error('Invalid API key. Please check your configurations. ');
-          }
-          else {
-            throw new Error('Forecast service is temporary unavailable. Please try again later')
-          }
-        }
+          if (response.status === 404) throw new Error(`City "${location}" not found. Please check spelling.`);
+          
+        if (response.status === 401) throw new Error('Invalid API key. Please check your configurations. ');
+  
+        throw new Error('Forecast service is temporary unavailable. Please try again later');
+      }
 
         const data: ForecastData = await response.json();
         setForecast(data);
-        console.log('Forecast data: ', data);
+        return data;
 
      } catch (err) {
        const errorMessage = err instanceof Error ? err.message : 'An unknown error occured';
        setError(errorMessage);
-       console.error('Error:', err);
+       return null;
      } finally {
        setLoading(false);
      }
@@ -292,10 +294,10 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
       setWeather(data);
       console.log('Weather by coords: ', data);
 
-      await fetchForecast(data.name);
+      const forecastData = await fetchForecast(data.name);
 
-      if (forecast) {
-        saveToCache(data.name, data, forecast);
+      if (forecastData) {
+        saveToCache(data.name, data, forecastData);
       }
 
     }  catch (err) {
@@ -366,9 +368,15 @@ export const WeatherAPI = ({ children }: { children: ReactNode}) => {
     };
    }, []);
 
+      useEffect(() => {
+    if (lastFetchedCity) {
+      fetchWeather(lastFetchedCity);
+    }
+   }, [units]);
+
   return (
       <>
-        <WeatherContext.Provider value={{ weather, forecast, loading, error, isCached, fetchWeather, fetchForecast, searchCities, fetchWeatherByCoords, clearError, refreshWeather, getCachedData, }}>
+        <WeatherContext.Provider value={{ weather, forecast, loading, error, isCached, units, setUnits, fetchWeather, fetchForecast, searchCities, fetchWeatherByCoords, clearError, refreshWeather, getCachedData, }}>
           {children}
         </WeatherContext.Provider>
       </>

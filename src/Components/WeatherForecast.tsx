@@ -4,8 +4,9 @@ import ErrorMessage from '@/Components/ErrorMessage'
 
 
 export const WeatherForecast = () => {
-  const { forecast, loading, error, fetchForecast } = useWeather();
-
+  const { forecast, loading, error, fetchForecast, units } = useWeather();
+  const unitSymbol = units === 'imperial' ? '°F' : '°C';
+  
   useEffect(() => {
     fetchForecast();
   }, []);
@@ -34,8 +35,7 @@ export const WeatherForecast = () => {
     }
 
    if (error) {
-      return 
-        <ErrorMessage message={`${error} at text not found`} onRetry={fetchForecast} />;
+      return <ErrorMessage message={error} onRetry={fetchForecast} />;
     }
     if (!forecast || !forecast.list) {
       return (
@@ -101,7 +101,7 @@ export const WeatherForecast = () => {
                  
                  <div className={'forecastItemDetails'}>
                   <div className={'tempInfo'}>
-                    <div className={'tempValue'}>{temp}°C</div>
+                    <div className={'tempValue'}>{temp}{unitSymbol}</div>
                     <div className={'tempMain'}>{humidity}%</div>
                    </div>
                  </div>

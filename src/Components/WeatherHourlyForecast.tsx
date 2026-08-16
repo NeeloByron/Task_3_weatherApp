@@ -6,10 +6,10 @@ import ErrorMessage from '@/Components/ErrorMessage';
 type ForecastListItem = ForecastData['list'][0];
 
 export const WeatherHourlyForecast: React.FC = () => {
-  const { forecast, loading, error } = useWeather();
+  const { forecast, loading, error, fetchForecast } = useWeather();
 
   if (error) {
-      return <ErrorMessage message={error} onRetry={() => (ForecastData?.())} />;
+      return <ErrorMessage message={error} onRetry={fetchForecast} />;
     }
 
   if (loading) {
