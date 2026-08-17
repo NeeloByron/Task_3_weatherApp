@@ -13,7 +13,7 @@ interface ToastState {
 }
 
 const WeatherAlerts: React.FC<WeatherAlertProps> = ({ onAlert }) => {
-    const { weather } = useWeather();
+    const { weather, units } = useWeather();
     const [alerts, setAlerts] = useState<string[]>([]);
     const [toast, setToast] = useState<ToastState>({
         show: false,
@@ -23,6 +23,9 @@ const WeatherAlerts: React.FC<WeatherAlertProps> = ({ onAlert }) => {
 
     useEffect(() => {
         if (!weather) return;
+
+        const tempC = units === 'imperial' ? (weather.main.temp - 32) * (5 / 9) : weather.main.temp;
+        const windMs = units === 'imperial' ? weather.wind.speed * 0.44704 : weather.wind.speed;
 
         const newAlerts: string[] = [];
         const alertIcons: string[] = [];
@@ -40,19 +43,19 @@ const WeatherAlerts: React.FC<WeatherAlertProps> = ({ onAlert }) => {
         }
 
         {/* severe heat*/}
-        if (weather.main.temp > 35) {
+        if (tempC > 35) {
             newAlerts.push('Extreme heat warning! Keep cool and hydrated');
             alertIcons.push('01d');
         }
 
         {/*severe coldness*/}
-        if (weather.main.temp < -5) {
+        if (tempC < -5) {
             newAlerts.push('Extreme cold warning! keep warm');
             alertIcons.push('13d');
         }
 
         {/*wind*/}
-        if (weather.wind.speed > 20) {
+        if (windMs > 20) {
             newAlerts.push('High wind warning! stay indoors');
             alertIcons.push('50d');
         }
@@ -76,7 +79,7 @@ const WeatherAlerts: React.FC<WeatherAlertProps> = ({ onAlert }) => {
 
             return () => window.clearTimeout(timeId);
         }
-    }, [weather, onAlert]);
+    }, [weather, units, onAlert]);
 
     if (alerts.length === 0 && !toast.show) {
         return null;
@@ -98,28 +101,6 @@ const WeatherAlerts: React.FC<WeatherAlertProps> = ({ onAlert }) => {
                         onClick={() => setToast(prev => ({ ...prev, show: false}))}>
                         <i className={'fa-solid fa-xmark'}></i>
                 </button>
-            </div>
-         )}
-
-          {/*alert card*/}
-         {alerts.length > 0 && (
-          <div className={'alertContainer'}>
-           {alerts.map((alert, index) => (
-             <div key={`${alert}-${index}`} 
-                  className={'alertItem'}>
-                  <span>{alert}</span>
-            <button onClick={() =>{
-                    const newAlerts = [...alerts];
-                    newAlerts.splice(index, 1);
-                    setAlerts(newAlerts);
-                    if (newAlerts.length === 0) {
-                        setToast(prev => ({ ...prev, show: false}));
-                    }
-                 }}>
-                  <i className={'fa-solid fa-xmark'}></i>  
-                 </button>
-               </div>
-                ))}
             </div>
          )}
       </>

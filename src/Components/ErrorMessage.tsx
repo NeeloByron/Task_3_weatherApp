@@ -12,7 +12,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, onRetry }) 
               <div className={'errorIcon'}>
                 <i className={'fa-solid fa-circle-exclamation alert-icon'}></i>
               </div>
-              <h3 className={'errorTitle'}>Something went wrong</h3>
+              <h3 className={'errorTitle'}>{message}</h3>
             </div>
             {/*<p className={'errorM'}>Message</p>*/}
              {onRetry && <button onClick={() => void onRetry()} className={'retryButton'}>

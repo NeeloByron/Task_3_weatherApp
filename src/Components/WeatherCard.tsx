@@ -6,7 +6,8 @@ import ErrorMessage from './ErrorMessage';
 
 
 export const WeatherCard: React.FC = () => {
- const { weather, loading, error, fetchForecast} = useWeather();
+ const { weather, loading, error, fetchForecast, units} = useWeather();
+ const unitSymbol = units === 'imperial' ? '°F' : '°C';
 
 if (loading) {
   return <div className={'weatherCardContainer'}>loading....</div>;
@@ -72,11 +73,11 @@ if (error) {
            {/*Display */}
            <div className={'weatherMain'}>
              <div className={'weatherContent'}>
-               <div className={'tempContain'}>{weather?.main?.temp !== undefined ? `${Math.round(weather.main.temp)}°C` : '--°C'}</div>
+               <div className={'tempContain'}>{weather?.main?.temp !== undefined ? `${Math.round(weather.main.temp)}${unitSymbol}` : `--${unitSymbol}`}</div>
                 <div className={'description'}>{weather?.weather?.[0]?.description || 'Weather description'}</div>
                  <div className={'range'}>
-                   <span>Low: {weather?.main?.temp_min ? `${Math.round(weather.main.temp_min)}°C` : 'Minimum Temperature'}</span>
-                   <span>High: {weather?.main?.temp_max ? `${Math.round(weather.main.temp_max)}°C` : 'Maximum Temperature'}</span>
+                   <span>Low: {weather?.main?.temp_min ? `${Math.round(weather.main.temp_min)}${unitSymbol}` : 'Minimum Temperature'}</span>
+                   <span>High: {weather?.main?.temp_max ? `${Math.round(weather.main.temp_max)}${unitSymbol}` : 'Maximum Temperature'}</span>
                 </div>
              </div>
              
@@ -134,7 +135,7 @@ if (error) {
                       <div>
                          <span className={'statLabel'}>Feels like</span>
                       </div>
-                     <div className={'statValue'}>{weather?.main?.feels_like !== undefined ? `${Math.round(weather.main.feels_like)}°C` : '---'} </div>
+                     <div className={'statValue'}>{weather?.main?.feels_like !== undefined ? `${Math.round(weather.main.feels_like)}${unitSymbol}` : '---'} </div>
                    </div>
                   </div>  
                  </div>

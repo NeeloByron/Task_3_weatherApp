@@ -2,9 +2,10 @@ import React from 'react';
 import { useWeather } from '@/Services/WeatherAPI';
 
 export const TempToggle = () => {
-  const { units, setUnits } = useWeather();
+  const { units, setUnits, loading } = useWeather();
   
   const toggleUnit = (unit: 'metric' | 'imperial') => {
+    if (loading || unit === units) return;
     setUnits(unit);
   };
   return (
@@ -12,7 +13,7 @@ export const TempToggle = () => {
           <div className={'toggleBtnContainer'}>
             <button className={`toggleBtn ${units === 'metric' ? 'active' : ''}`}
                     onClick={() => toggleUnit('metric')}
-                    arial-label={'switch to Celsius'}>°C</button>
+                    aria-label={'switch to Celsius'}>°C</button>
             <button className={`toggleBtn ${units === 'imperial' ? 'active' : ''}`}
                     onClick={() => toggleUnit('imperial')}
                     aria-label={'Switch to Fahrenheit'}>°F</button>
