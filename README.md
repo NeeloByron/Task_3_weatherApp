@@ -16,7 +16,7 @@
 
 ## Screenshot 
 <p align="center">
-  <img src="./src/assets/weather-app.png" alt="weather forecast" width="700">
+  <img src="./src/assets/weather-app.png" alt="weather" width="700">
 </p>
 
 <p>Resources</p>
