@@ -75,10 +75,6 @@ Technologies Used
 - Geolocation API - Location detection
 - Weather API - Real-time weather data
 
-License
-
-- This project is open and available under the MIT License.
-
 Acknowledgements 
 
 - *Weather data provided by:* Open WeatherAPi
