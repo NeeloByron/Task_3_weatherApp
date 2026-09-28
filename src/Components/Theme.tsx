@@ -1,24 +1,26 @@
-import ReactSwitch from "react-switch";
-import React, { useState, createContext, useContext } from "react";
+import  { useContext } from "react";
 import { ThemeContext } from "@/Components/WeatherApp"
 
 
 export const Theme = () => {
+  // Read the shared theme settings from the context
    const context = useContext(ThemeContext);
 
+   // Hide this component if no theme context value is avaiable
    if (!context) return null;
 
-   const { theme, toggleTheme } = context;
-   const isDark = theme === "dark";
+   const { theme, toggleTheme } = context; // current theme
+   const isDark = theme === "dark"; // true when dark mode
 
   return (
         <>
           <button type={'button'}
           className={'themeToggle'}
           onClick={toggleTheme}
+          // Tell screen readers what clicking the button will do
           aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
 
-          {/*sun*/}
+          {/* Display the sun and apply the dark class when needed*/}
           <div className={`segment-sun ${isDark ? "dark" : ""}`}>
             <svg 
               xmlns={'https://www.w3.org/2000/svg'}
@@ -43,7 +45,7 @@ export const Theme = () => {
               </svg>
             </div>
             
-            {/*moon*/}
+            {/* Display the moon and apply the dark when needed */}
             <div className={`segment-moon ${isDark ? "dark" : ""}`}>
             <svg 
               xmlns={'https://www.w3.org/2000/svg'}
