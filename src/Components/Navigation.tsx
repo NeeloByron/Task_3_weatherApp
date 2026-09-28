@@ -1,5 +1,5 @@
 
-
+// Display the app's title
 export const Navigation = () => {
   return (
         <>
@@ -7,7 +7,7 @@ export const Navigation = () => {
             <h1>Weather</h1>
           </div>
         </>
-  )
-}
+      )
+   }
 
 export default Navigation
