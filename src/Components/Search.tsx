@@ -2,32 +2,34 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useWeather } from '@/Services/WeatherAPI';
 import toast from 'react-hot-toast';
 
+// Describe the information stored for each city suggestion
 interface GeoCity {
   name: string;
   lat: number;
   lon: number;
   country: string;
-  state? : string;
+  state? : string; // some cities might not have state
 }
 
 export const Search = () => {
-  const [query, setQuery] = useState('');
-  const [suggestions, setSuggestions] = useState<GeoCity[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
-
+  const [query, setQuery] = useState(''); // store what the user types
+  const [suggestions, setSuggestions] = useState<GeoCity[]>([]); // Store the cities returned by search
+  const [isLoading, setIsLoading] = useState(false); // track whether city suggestions are loading
+  const [showSuggestions, setShowSuggestions] = useState(false); // control weather the suggestions drop down is visible
+  const [hasSearched, setHasSearched] = useState(false); // track whether a city search has finished
+  const searchRef = useRef<HTMLDivElement>(null); // keep a reference to the container to detect clicks outside it
+   // get weather functions and state from your custom hook
   const { fetchWeather, searchCities, loading, clearError, error } = useWeather();
   
   useEffect(() => {
+    // close the dropdown when someone clicks outside the container
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setShowSuggestions(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-
+     // Remove the listener when this component leaves the page
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
@@ -35,6 +37,7 @@ export const Search = () => {
 
   useEffect(() => {
     if (error) {
+      // shows an error notification when the hook provides an error
       toast.error(error, {
         duration: 4000,
         position: 'bottom-right',
@@ -44,36 +47,42 @@ export const Search = () => {
 
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    // update the input and remove the previous weather error
     setQuery(value);
-
     clearError();
-    setShowSuggestions(true);
-    clearError();
-
+    
+    // Only search when there are at least three characters
     if (value.length > 2) {
       setShowSuggestions(true);
       setIsLoading(true);
+
       try {
+        // Ask for matching cities and store the results
       const results = await searchCities(value);
       setSuggestions(results);
       setHasSearched(true);
       } catch (error) {
+        // clear the results if the city search fails
         console.error('Search error: ', error);
         setSuggestions([]);
         setHasSearched(true);
        } finally {
+        // stop showing the suggestions spinner
         setIsLoading(false);
       }
     } else {
+      // Hide suggestions when the input is too short
       setSuggestions([]);
       setShowSuggestions(false);
       setHasSearched(false);
+      setIsLoading(false)
     }
   };
 
    const handleSubmit = async (e: React.FormEvent) => {
+    // Prevent the form from refreshing the page.
     e.preventDefault();
-
+    
     if (query.trim()) {
       clearError();
       
@@ -90,26 +99,32 @@ export const Search = () => {
         {
           duration: 4000,
           position: 'bottom-right'
-        }  
+        },  
        );  
+
+       // Clear the search after the promise resolves successfully
        setQuery('');
        setSuggestions([]);
        setShowSuggestions(false);
        setHasSearched(false);
 
        } catch (error) {
+        // keep the input so the user can try again
        console.error('Submit error:', error);
        }
      }
     };
 
    const handleSuggestionClick = async (city: GeoCity) => {
+    // ignore another selection while weather is loading
+    if (loading) return
+
     clearError();
 
     try {
     const promise = fetchWeather(city.name);
-
-    toast.promise(
+    // shows progress and wait for the weather request to finish
+    await toast.promise(
       promise,
        {
          loading: `Fetching weather for ${city.name}...`,
@@ -121,7 +136,8 @@ export const Search = () => {
          position: 'bottom-right',
        }
     );
-
+    
+    // clear the search after the promise resolves successfully
     setQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
@@ -136,6 +152,7 @@ export const Search = () => {
       <> 
         {/*search container*/}
         <div className={'searchContainer'} ref={searchRef}>
+          {/* The form handles both the submit and enter key. */}
           <form className={'formContainer'} onSubmit={handleSubmit}>
             <div className={'formGroup'}>
               <input className={'searchInput'}
@@ -145,9 +162,11 @@ export const Search = () => {
                       onChange={handleInputChange}
                       onFocus={() => setShowSuggestions(true)}
                       onKeyDown={(e) => {
+                        // only reopen suggestions for a long enough search
                       if (e.key === 'Enter') {
                           e.preventDefault();
                           handleSubmit(e);}}}/>
+              {/* Disable submission while loading or when input is empty */}
               <button 
               className={'searchSubmitBtn'} 
               type={'submit'} 
@@ -164,7 +183,7 @@ export const Search = () => {
             </div>
           </form>
            
-      {/* Dropdown suggestions */}
+      {/* Dropdown suggestions: shows loading, no results or matching cities */}
        {showSuggestions &&  (
         <div className={'searchDropDown'}>
           {isLoading ? (
@@ -194,6 +213,7 @@ export const Search = () => {
               </div>
             ) : suggestions.length > 0 ? (
               suggestions.map((city, index) => (
+                // create a selectable button for each matching city
                 <button
                   key={`${city.name}-${city.country}-${index}`}
                   className={'searchButton'}
