@@ -1,5 +1,4 @@
-# gitignore
- .env
- .env.local
- .env.production
- .env.development
+# Ignore environment files
+.env
+.env.*
+!.env.example
