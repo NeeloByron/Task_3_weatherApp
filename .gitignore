@@ -1,12 +1,5 @@
 # Environment files
+node_modules/
+dist/
 .env
 .env.*
-
-# Dependencies
-node_modules/
-
-# Build output
-dist/
-
-# Logs
-*.log
