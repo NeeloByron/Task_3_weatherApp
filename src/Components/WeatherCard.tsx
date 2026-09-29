@@ -1,10 +1,9 @@
 import React from "react"
-import locationImg from '@/Assets/location.png'
 import { useWeather } from '@/Services/WeatherAPI'
 import WeatherAlerts from '@/Components/WeatherAlerts'
 import ErrorMessage from './ErrorMessage';
 
-
+// Display weather card data with loading, error and empty states
 export const WeatherCard: React.FC = () => {
  const { weather, loading, error, fetchForecast, units} = useWeather();
  const unitSymbol = units === 'imperial' ? '°F' : '°C';
@@ -14,7 +13,7 @@ if (loading) {
 }
 
 if (error) {
-    return <ErrorMessage message={error} onRetry={() => (fetchForecast?.())} />;
+    return <ErrorMessage message={error} onRetry={async () => { await fetchForecast?.(); }} />;
   }
 
  if (!weather) {
@@ -28,6 +27,7 @@ if (error) {
   );
  }
 
+ // converts a country code to its english name, falling back to the code
  const getCountryName = (countryCode: string) => {
   try {
     return new Intl.DisplayNames(['en'], { type: 'region'}).of(countryCode) || countryCode;
@@ -43,9 +43,6 @@ if (error) {
            {/*Header*/}
            <div className={'weatherCardHeader'}>
              <div className={'headerLeft'}>
-               {/* <div className={'iconHolder'}>
-                   <img src={locationImg} alt={'location icon'}/>
-                 </div> */}
                  <div>
                    <h2>{weather.name}</h2>
                    <p>{weather?.sys?.country? getCountryName(weather.sys.country) : 'Unknown'}</p>
@@ -140,45 +137,6 @@ if (error) {
                   </div>  
                  </div>
                </div>
-
-                {/*sun time
-               <div className={'sunGrid'}>
-                 <div className={'sunCard'}>
-                    <div className={'sunHeader'}>
-                      <div className={'sunIcon'}>
-                         <i className={'fa-solid fa-sun sunIcon'}></i>
-                       </div>
-                      <span className={'sunLabel'}>Sunrise</span>
-                      </div>
-                        <div className={'sunValue'}>
-                          {weather?.sys?.sunrise? new Date(weather.sys.sunrise * 1000). toLocaleTimeString('en-US', {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            hour12: true
-                          }).toUpperCase()
-                          : '--'}
-                        </div>
-                      </div>
-
-                    <div className="sunCard">
-                    {/*night time
-                    <div className="sunHeader">
-                      <div className="sunIcon">
-                        <i className="fa-solid fa-moon"></i>
-                      </div>
-                    <span className="sunLabel">Sunset</span>
-                  </div>
-                <div className="sunValue">
-                  {weather.sys?.sunset ? new Date(weather.sys.sunset * 1000).toLocaleTimeString('en-US', {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            hour12: true
-                          }).toUpperCase()
-                          : '--'}
-                </div>
-              </div>
-            </div>*/}
-
           </div>
        </div>
       </>

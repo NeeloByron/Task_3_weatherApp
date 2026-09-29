@@ -4,6 +4,7 @@ import React from "react";
 
 type ForecastListItem = ForecastData['list'][0];
 
+// prepares the hourly forecast and displays loading or empty states
 export const WeatherHourlyForecast: React.FC = () => {
   const { forecast, loading, error } = useWeather();
 
@@ -47,6 +48,7 @@ export const WeatherHourlyForecast: React.FC = () => {
      );
    }
 
+   // converts a unix timestamp in seconds into a local 12 hour time
    const formatTime = (timeStamp: number): string => {
     const date = new Date(timeStamp * 1000);
     return date.toLocaleTimeString('en-US', {
@@ -56,6 +58,7 @@ export const WeatherHourlyForecast: React.FC = () => {
     }); 
    };
 
+   // converts a unix timestamp in seconds into a local weekday,month and day 
    const formatDate = (timeStamp: number): string => {
     const date = new Date(timeStamp * 1000);
     return date.toLocaleDateString('en-US', {
@@ -65,6 +68,7 @@ export const WeatherHourlyForecast: React.FC = () => {
     });
    };
 
+   // selects 8 enteries starting at the nearest upcoming clock time, wrapping around the list if needed
    const getNext24Hours = (): ForecastListItem[] => {
     const now = new Date();
     const currentHour: number = now.getHours();
@@ -74,6 +78,7 @@ export const WeatherHourlyForecast: React.FC = () => {
     let startIndex: number = 0;
     let minDiff: number = Infinity;
 
+    // compares each entry's clock time with the current time to find the smallest forward
     forecast.list.forEach((item: ForecastListItem, index: number) => {
       const itemDate: Date = new Date(item.dt * 1000);
       const itemHour: number = itemDate.getHours();
