@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useWeather } from '@/Services/WeatherAPI';
 
-
+// Displays up to 5 forecast enteries with loading and empty states
 export const WeatherForecast = () => {
   const { forecast, loading, error, fetchForecast, units } = useWeather();
   const unitSymbol = units === 'imperial' ? '°F' : '°C';
   
+  // fetches the forecast on mount and when the fetch function changes
   useEffect(() => {
     fetchForecast();
   }, []);
@@ -59,6 +60,7 @@ export const WeatherForecast = () => {
       );
     } 
     
+    // keeps every 8 forecast entry
   const dailyForecast = forecast.list.filter((_, index) => index % 8 === 0);
   return ( 
     <>
@@ -101,6 +103,7 @@ export const WeatherForecast = () => {
                  <div className={'forecastItemDetails'}>
                   <div className={'tempInfo'}>
                     <div className={'tempValue'}>{temp}{unitSymbol}</div>
+                    <div className={'tempFeelsLike'}>Feels like {feelsLike}{unitSymbol}</div>
                     <div className={'tempMain'}>{humidity}%</div>
                    </div>
                  </div>
